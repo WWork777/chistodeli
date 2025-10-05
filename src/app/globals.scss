@@ -1,0 +1,32 @@
+@import "tailwindcss";
+@font-face {
+  font-family: "Montserrat";
+  src: url(../../fonts/Montserrat-Medium.ttf);
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url(../../fonts/Montserrat-Regular.ttf);
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url(../../fonts/Montserrat-SemiBold.ttf);
+  font-weight: 600;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+body {
+  width: 100vw;
+  background: #FFF;
+  overflow-x: hidden;
+}
+button {
+  &:hover {
+    cursor: pointer;
+  }
+}

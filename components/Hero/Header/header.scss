@@ -1,0 +1,148 @@
+@function calcFluidFontSize($f-min, $f-max, $v-min, $v-max) {
+  $k: ($f-max - $f-min)/($v-max - $v-min);
+  $b: $f-min - $k * $v-min;
+
+  $b: $b * 1px;
+
+  @return calc( #{$k} * 100vw + #{$b} );
+}
+.header.withBackground {
+    background: rgba(256, 256, 256, .54);
+    box-shadow: inset 0 0 20px rgba(256, 256, 256, .2);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, .05);
+    backdrop-filter:blur(30px);
+}
+
+.header.hidden {
+  transform: translateY(-100%);
+}
+header {
+    animation: header 1s;
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: all .3s;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+    height: 10vh;
+    padding: 0 12vw;
+    z-index: 1000;
+    .burger {
+        width: 30px;
+        height: 30px;
+        display: none;
+    }
+    .navigate-menu {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 73%;
+        height: 70px;
+        background: rgba(256, 256, 256, .54);
+        border-radius: 185px;
+        padding-left: 3.5%;
+        padding-right: 1.5%;
+        align-items: center;
+        box-shadow: inset 0 0 20px rgba(256, 256, 256, .2);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, .05);
+        backdrop-filter:blur(30px);
+        .menu {
+            display: flex;
+            flex-direction: row;
+            gap: 25px;
+            font-family: "Montserrat";
+            font-weight: 400;
+            font-size: calcFluidFontSize(14,16,1600,1920);
+            a {
+                opacity: 0;
+                animation: navigation 1s forwards;
+                animation-delay: 1s;
+            }
+        }
+        .contacts {
+            display: flex;
+            gap: 38px;
+            font-family: "Montserrat"; 
+            justify-content: end;     
+            font-weight: 400;
+            width: 40%;
+            .phone-city {
+                .phone {
+                    display: flex;
+                    font-size: calcFluidFontSize(14,16,1500,1920);
+                } 
+                .city {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: end;
+                    select {
+                        background-image: url(../../../public/arrow_header.svg);
+                        background-repeat: no-repeat;
+                        background-position: right 8px;
+                        appearance: none;
+                        -webkit-apperance: none;
+                        -moz-apperance: none;
+                        border: none;
+                        outline: none;
+                        width: 91px;
+                        font-size: 14px;
+                        color: rgba(0, 0, 0, .7);
+                        display: flex;
+                        flex-direction: row;
+
+                    }
+                }
+            }
+            .icons {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+        }
+    }
+}
+@media (max-width: 1600px) {
+    header {
+        padding: 0 5vw;
+    }
+    
+}
+@media (max-width: 1200px) {
+    header {
+        > .navigate-menu {
+        display: none;
+        }
+        .burger {
+            display: block;
+        }
+    }
+}
+@media (max-width: 720px) {
+    header {
+        .header-logo {
+        width: 105px;
+        height: 43px;
+        }
+    }
+}
+@keyframes header {
+    0% {
+        transform: translateY(-100px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+@keyframes navigation {
+    0% {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}

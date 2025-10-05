@@ -1,0 +1,62 @@
+.clients {
+    padding: 50px 12vw 50px 12vw;
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+    overflow: hidden;
+    .clients-text {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        h2 {
+            font-family: "Montserrat";
+            font-size: 50px;
+            font-weight: 600;
+        }
+        p {
+            font-family: "Montserrat";
+            font-size: 24px;
+            font-weight: 500; 
+        }
+    }
+}
+.clients-catalog {
+    .swiper-slide {
+        height: 300px; // ← задай высоту
+        display: flex;
+    }
+}
+@media (max-width: 1280px) {
+    .clients {
+        .clients-text {
+            h2 {
+                font-size: 35px;
+            }
+            p {
+            font-size: 20px;
+        }
+        }
+    }
+}
+@media (max-width: 820px) {
+    .clients {
+        padding: 50px 17px;
+    }
+}
+@media (max-width: 480px) {
+    .clients {
+        .clients-text {
+            h2 {
+                font-size: 20px;
+            }
+            p {
+            font-size: 16px;
+        }
+        }
+    }
+    .clients-catalog {
+        .swiper-slide {
+            height: 100px;
+        }
+    }
+}

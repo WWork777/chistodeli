@@ -1,0 +1,84 @@
+.offcanvas {
+    position: fixed; // вместо absolute
+    top: 0;
+    right: 0;
+    width: 40vw;
+    height: 100vh;
+    z-index: 1000;
+    background: rgba(256, 256, 256, .01);
+    box-shadow: inset 0 0 20px rgba(256, 256, 256, .2);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, .05);
+    backdrop-filter: blur(30px);
+    visibility: hidden; // Добавь это
+    opacity: 0; // Добавь это
+    transition: all .5s ease; // Добавь это для плавности
+    
+    // Добавь этот класс для показа
+    &.show {
+        visibility: visible;
+        opacity: 1;
+    }
+    
+    .offcanvas-header {
+        width: 100%;
+        display: flex;
+        justify-content: end;
+        padding: 15px;
+        .btn-close {
+            transform: rotate(45deg);
+        }
+    }
+    
+    .offcanvas-menu {
+        position: relative;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: "Montserrat";
+        font-weight: 500;
+        gap: 20px;
+        
+        > .offcanvas-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .phone {
+            display: flex;
+        }
+        
+        .city {
+            display: flex;
+            flex-direction: column;
+            align-items: end;
+            select {
+                background-image: url(../../../public/arrow_header.svg);
+                background-repeat: no-repeat;
+                background-position: right 8px;
+                appearance: none;
+                -webkit-apperance: none;
+                -moz-apperance: none;
+                border: none;
+                outline: none;
+                width: 91px;
+                font-size: 14px;
+                color: rgba(0, 0, 0, .7);
+                display: flex;
+                flex-direction: row;
+            }
+        }
+        
+        .icons {
+            display: flex;
+            gap: 10px;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .offcanvas {
+        width: 96%;
+    }
+}

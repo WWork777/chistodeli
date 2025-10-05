@@ -1,0 +1,275 @@
+@function calcFluidFontSize($f-min, $f-max, $v-min, $v-max) {
+  $k: ($f-max - $f-min)/ ($v-max - $v-min);
+  $b: $f-min - $k * $v-min;
+
+  $b: $b * 1px;
+
+  @return calc(#{$k} * 100vw + #{$b});
+}
+.hero {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  .hero-background {
+    position: absolute;
+    z-index: -99;
+    object-fit: cover;
+    height: 100vh;
+    width: 100%;
+  }
+  .hero-content {
+    padding: 0 12vw;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    .hero-slogan {
+      margin-top: 269px;
+      width: 100%;
+      font-family: "Montserrat";
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+      h1 {
+        font-weight: 600;
+        font-size: calcFluidFontSize(35, 52, 1200, 1920);
+        width: 100%;
+      }
+      span {
+        display: block;
+        font-weight: 500;
+        font-size: calcFluidFontSize(18, 30, 1000, 1920);
+        width: 100%;
+      }
+    }
+    .hero-button {
+      display: flex;
+      flex-direction: row;
+      padding-left: 30px;
+      padding-right: 6px;
+      justify-content: end;
+      width: 340px;
+      height: 68px;
+      border-radius: 98px;
+      background: rgba(256, 256, 256, 0.5);
+      margin-top: calcFluidFontSize(20, 65, 1000, 1920);
+      backdrop-filter: blur(30px);
+      border: 1px solid #fff;
+      transition: all 1s;
+      &:hover {
+        transform: translateY(3px);
+        background: rgba(256, 256, 256, 0.2);
+        transition: all 0.3s;
+      }
+      a {
+        display: flex;
+        flex-direction: row;
+        font-family: "Montserrat";
+        font-weight: 400;
+        font-size: 24px;
+        gap: 20px;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+  }
+  .hero-advantage {
+    width: 100%;
+    height: calcFluidFontSize(90, 140, 1000, 1920);
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: row;
+    margin-top: calcFluidFontSize(50, 183, 1000, 1920);
+    gap: 27px;
+    .advantage {
+      width: 32%;
+      height: 100%;
+      border-radius: 20px;
+      background: rgba(256, 256, 256, 0.4);
+      font-family: "Montserrat";
+      font-weight: 400;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      box-shadow: inset 0 0 1px rgb(256, 256, 256);
+      box-shadow: inset 0 0 4px rgb(256, 256, 256);
+      backdrop-filter: blur(25px);
+      span:first-child {
+        font-size: calcFluidFontSize(30, 54, 1000, 1920);
+      }
+      span:last-child {
+        font-size: calcFluidFontSize(13, 20, 1000, 1920);
+      }
+    }
+  }
+  .woman-img {
+    position: absolute;
+    left: 57vw;
+    bottom: 0;
+  }
+}
+@media (max-width: 1600px) {
+  .woman-img {
+    width: 550;
+    height: 650;
+  }
+}
+@media (max-width: 1280px) {
+  .hero {
+    .hero-content {
+      .hero-slogan {
+        margin-top: 200px;
+      }
+    }
+  }
+}
+@media (max-width: 1200px) {
+  .woman-img {
+    width: 400px;
+    height: 500px;
+  }
+  .hero {
+    .hero-content {
+      .hero-slogan {
+        gap: 15px;
+        h1 {
+          font-size: 25px;
+        }
+        span {
+          font-size: 20px;
+        }
+      }
+      .hero-button {
+        width: 230px;
+        height: 45px;
+        padding-right: 3px;
+        a {
+          font-size: 14px;
+        }
+        svg {
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 900px) {
+  .woman-img {
+    display: none;
+  }
+  .hero {
+    .hero-content {
+      .hero-slogan {
+        margin-top: 0;
+      }
+    }
+  }
+}
+@media (max-width: 720px) {
+  .hero {
+    .hero-content {
+      padding: 0 17px;
+      .hero-slogan {
+        margin-top: 50px;
+      }
+      .hero-button {
+        width: 250px;
+        height: 68px;
+        a {
+          font-size: 14px;
+        }
+        svg {
+          width: 63px;
+          height: 63px;
+        }
+      }
+    }
+    .hero-advantage {
+      flex-direction: column;
+      width: 100%;
+      height: 45%;
+      gap: 20px;
+      margin-top: 70px;
+      .advantage {
+        width: 100%;
+        height: 100px;
+        span:first-child {
+          font-size: 30px;
+        }
+        span:last-child {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 500px) {
+  .hero {
+    .hero-content {
+      padding: 0 17px;
+      .hero-slogan {
+        gap: 10px;
+        h1 {
+          font-size: 16px;
+        }
+        span {
+          font-size: 13px;
+        }
+      }
+      .hero-button {
+        margin-top: 50px;
+        width: 100%;
+        justify-content: space-between;
+        a {
+          font-size: 20px;
+          width: 100%;
+        }
+      }
+    }
+    .hero-advantage {
+      flex-direction: column;
+      width: 100%;
+      height: 45%;
+      gap: 20px;
+      .advantage {
+        width: 100%;
+        height: 100px;
+        span:first-child {
+          font-size: 30px;
+        }
+        span:last-child {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 380px) {
+  .hero {
+    .hero-content {
+      .hero-button {
+        margin-top: 25px;
+      }
+    }
+    .hero-advantage {
+      margin-top: 30px;
+    }
+  }
+}
+@media (max-height: 1000px) and (min-width: 1600px) {
+  .hero {
+    .hero-content {
+      .hero-slogan {
+        margin-top: 200px;
+      }
+    }
+    .hero-advantage {
+      margin-top: 100px;
+    }
+  }
+}
