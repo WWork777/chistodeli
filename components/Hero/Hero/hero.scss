@@ -23,15 +23,16 @@
     position: relative;
     flex-direction: column;
     justify-content: center;
+    overflow: hidden;
     width: 100%;
     height: 100vh;
     .hero-slogan {
-      margin-top: 269px;
+      margin-top: 25vh;
       width: 100%;
-      font-family: "Montserrat";
+      font-family: "Oswald";
       display: flex;
       flex-direction: column;
-      gap: 50px;
+      gap: 40px;
       h1 {
         font-weight: 600;
         font-size: calcFluidFontSize(35, 52, 1200, 1920);
@@ -42,6 +43,7 @@
         font-weight: 500;
         font-size: calcFluidFontSize(18, 30, 1000, 1920);
         width: 100%;
+        color: #0091C9;
       }
     }
     .hero-button {
@@ -54,7 +56,7 @@
       height: 68px;
       border-radius: 98px;
       background: rgba(256, 256, 256, 0.5);
-      margin-top: calcFluidFontSize(20, 65, 1000, 1920);
+      margin-top: calcFluidFontSize(20, 50, 1000, 1920);
       backdrop-filter: blur(30px);
       border: 1px solid #fff;
       transition: all 1s;
@@ -75,6 +77,13 @@
       }
     }
   }
+  .hero-text-advantage {
+    font-family: "Oswald";
+    font-size: calcFluidFontSize(25, 40, 1200, 1920);
+    font-weight: 400px;
+    margin-top: calcFluidFontSize(50, 96, 1200, 1920);
+    
+  }
   .hero-advantage {
     width: 100%;
     height: calcFluidFontSize(90, 140, 1000, 1920);
@@ -82,27 +91,25 @@
     z-index: 10;
     display: flex;
     flex-direction: row;
-    margin-top: calcFluidFontSize(50, 183, 1000, 1920);
+    justify-content: space-between;
+    margin-top: 45px;
     gap: 27px;
     .advantage {
-      width: 32%;
+      width: calc(50% - 26px);
       height: 100%;
       border-radius: 20px;
       background: rgba(256, 256, 256, 0.4);
-      font-family: "Montserrat";
-      font-weight: 400;
+      font-family: "Oswald";
+      font-weight: 500;
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 15px;
+      gap: 10px;
       box-shadow: inset 0 0 1px rgb(256, 256, 256);
       box-shadow: inset 0 0 4px rgb(256, 256, 256);
       backdrop-filter: blur(25px);
-      span:first-child {
-        font-size: calcFluidFontSize(30, 54, 1000, 1920);
-      }
-      span:last-child {
-        font-size: calcFluidFontSize(13, 20, 1000, 1920);
+      span {
+        font-size: calcFluidFontSize(35, 52, 1200, 1920);
       }
     }
   }
@@ -110,27 +117,20 @@
     position: absolute;
     left: 57vw;
     bottom: 0;
+    z-index: -10;
   }
 }
 @media (max-width: 1600px) {
   .woman-img {
-    width: 550;
-    height: 650;
-  }
-}
-@media (max-width: 1280px) {
-  .hero {
-    .hero-content {
-      .hero-slogan {
-        margin-top: 200px;
-      }
-    }
+    width: 550px;
+    height: 800px;
   }
 }
 @media (max-width: 1200px) {
   .woman-img {
-    width: 400px;
-    height: 500px;
+    height: 70vh;
+    width: 700px;
+    left: 40vw !important;
   }
   .hero {
     .hero-content {
@@ -159,9 +159,6 @@
   }
 }
 @media (max-width: 900px) {
-  .woman-img {
-    display: none;
-  }
   .hero {
     .hero-content {
       .hero-slogan {
@@ -212,33 +209,56 @@
   .hero {
     .hero-content {
       padding: 0 17px;
+      justify-content: start;
+        .woman-img {
+          height: 90vh;
+          width: 800px;
+          left: 34vw !important;
+        }
       .hero-slogan {
         gap: 10px;
+        margin-top: 110px;
+        width: 100%;
         h1 {
-          font-size: 16px;
+          font-size: 20px;
         }
         span {
-          font-size: 13px;
+          font-size: 14px;
         }
       }
       .hero-button {
-        margin-top: 50px;
-        width: 100%;
+        margin-top: 35px;
+        width: 67%;
+        min-height: 60px;
         justify-content: space-between;
         a {
-          font-size: 20px;
+          font-size: calcFluidFontSize(11, 20, 340, 500);
           width: 100%;
+        }
+        svg {
+        width: 55px;
+        height: 55px;
         }
       }
     }
+    .hero-text-advantage {
+      font-size: 20px;
+      width: 200px;
+      margin-top: 40px;
+    }
     .hero-advantage {
       flex-direction: column;
-      width: 100%;
-      height: 45%;
-      gap: 20px;
+      width: 67%;
+      height: 80px;
+      gap: 15px;
+      margin-top: 20px;
       .advantage {
         width: 100%;
-        height: 100px;
+        min-height: 80px;
+        svg {
+          width: 47px;
+          height: 38px;
+        }
         span:first-child {
           font-size: 30px;
         }
@@ -258,18 +278,6 @@
     }
     .hero-advantage {
       margin-top: 30px;
-    }
-  }
-}
-@media (max-height: 1000px) and (min-width: 1600px) {
-  .hero {
-    .hero-content {
-      .hero-slogan {
-        margin-top: 200px;
-      }
-    }
-    .hero-advantage {
-      margin-top: 100px;
     }
   }
 }
