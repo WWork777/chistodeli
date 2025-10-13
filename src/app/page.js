@@ -11,6 +11,7 @@ import { Reviews } from "../../components/Reviews/reviews";
 import { Questions } from "../../components/Questions/questions";
 import { Clients } from "../../components/Clients/clients";
 import { ExampleWorks } from "../../components/Examples_works/examples_works";
+import CleaningCalculator from "../../components/Price_service/pricenew";
 
 export async function generateMetadata() {
   return {
@@ -84,7 +85,8 @@ export default function Home() {
       <HeaderOffCanvas />
       <Hero />
       <Users />
-      <Price />
+      {/* <Price /> */}
+      <CleaningCalculator />
       <ExampleWorks />
       <Promoutions />
       <Reviews />
