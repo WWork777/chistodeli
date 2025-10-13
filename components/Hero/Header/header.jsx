@@ -75,9 +75,10 @@ export function Header({ onOpenOffcanvas }) {
                         <div className="city">
                             <select name="options" id="exampleSelect">  
                                 <option value="volvo">Кемерово</option>  
-                                <option value="saab">Кемерово</option>  
-                                <option value="fiat">Кемерово</option>  
-                                <option value="audi">Кемерово</option>  
+                                <option value="saab">Нижний Новгород</option>  
+                                <option value="fiat">Саратов</option>  
+                                <option value="audi">Сочи</option>
+                                <option value="audi">Калининград</option>  
                             </select>
                         </div>
                     </div>
