@@ -21,8 +21,8 @@ export function Clients() {
             
             <div className="clients-catalog">
                 <Swiper
-                    slidesPerView={1}
-                    spaceBetween={0}
+                    slidesPerView={2}
+                    spaceBetween={15}
                     loop={true}
                     autoplay={{
                         delay: 2500,

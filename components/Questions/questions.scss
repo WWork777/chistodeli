@@ -25,6 +25,7 @@
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
+                align-items: center;
                 transition: all .5s;
                  &.active {
                     background: #0091C9;
@@ -59,8 +60,8 @@
                     }
                 }
                 button {
-                    width: 21px;
-                    height: 24px;
+                    width: 16px;
+                    height: 16px;
                     display: flex;
                     align-items: start;
                 }
@@ -71,6 +72,8 @@
 
 .button-question {
     transition: transform 0.3s ease;
+    width: 16px;
+    height: 16px;
     
     &.active {
         transform: rotate(45deg);
