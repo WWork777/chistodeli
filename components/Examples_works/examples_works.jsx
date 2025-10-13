@@ -9,9 +9,9 @@ import "./examples_works.scss";
 export function ExampleWorks() {
   const availableWorks = [
     { id: 1, img: "examplesWorks_1.webp" },
-    { id: 2, img: "examplesWorks_1.webp" },
-    { id: 3, img: "examplesWorks_1.webp" },
-    { id: 4, img: "examplesWorks_1.webp" },
+    { id: 2, img: "examplesWorks_2.webp" },
+    { id: 3, img: "examplesWorks_3.webp" },
+    { id: 4, img: "examplesWorks_4.webp" },
     { id: 5, img: "examplesWorks_1.webp" },
     { id: 6, img: "examplesWorks_1.webp" },
     { id: 7, img: "examplesWorks_1.webp" },
