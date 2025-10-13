@@ -1,78 +1,81 @@
 .clients {
-    padding: 50px 12vw 50px 12vw;
+  padding: 50px 12vw 50px 12vw;
+  display: flex;
+  flex-direction: column;
+  gap: 45px;
+  .clients-text {
     display: flex;
     flex-direction: column;
-    gap: 45px;
-    .clients-text {
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-        h2 {
-            font-family: "Montserrat";
-            font-size: 50px;
-            font-weight: 600;
-        }
-        p {
-            font-family: "Montserrat";
-            font-size: 24px;
-            font-weight: 500; 
-        }
-    }
-}
-.client {
-    padding: 30px 20px 44px 20px;
-    width: 56vw;
-    height: auto;
-    background-color: #eef3f3;
-    border-radius: 25px;
-    display: flex;
     gap: 30px;
-    img {
-        border-radius: 30px;
-        height: 333px;
+    h2 {
+      font-family: "Montserrat";
+      font-size: 50px;
+      font-weight: 600;
     }
-    .client-text {
-        font-family: "Montserrat";
-        h3 {
-            font-size: 40px;
-            font-weight: 600;
-            color: #0091C9;
-        }
-        span {
-            font-size: 30px;
-            font-weight: 500;
-
-        }
-        p {
-            font-size: 18px;
-            font-weight: 400;
-        }
+    p {
+      font-family: "Montserrat";
+      font-size: 24px;
+      font-weight: 500;
     }
+  }
 }
+
+.client {
+  padding: 30px 20px 44px 20px;
+  width: 100%;
+  height: auto;
+  background-color: #eef3f3;
+  border-radius: 25px;
+  display: flex;
+  gap: 30px;
+  img {
+    border-radius: 30px;
+    height: 333px;
+  }
+  .client-text {
+    font-family: "Montserrat";
+    h3 {
+      font-size: 30px;
+      font-weight: 600;
+      color: #0091c9;
+    }
+    span {
+      font-size: 20px;
+      font-weight: 500;
+    }
+    p {
+      margin-top: 30px;
+      font-size: 16px;
+      font-weight: 400;
+    }
+  }
+}
+
 .clients-catalog {
-    overflow: visible;
-    width: 100%;
-.swiper {
+  overflow: visible;
+  width: 100%;
+  .swiper {
     width: 100%;
     .swiper-slide {
-        height: auto;
-        display: flex;
-        width: 54vw;
+      height: auto;
+      display: flex;
+      width: 54vw;
     }
+  }
 }
-}
+
 @media (max-width: 1280px) {
-    .clients {
-        .clients-text {
-            h2 {
-                font-size: 35px;
-            }
-            p {
-            font-size: 20px;
-        }
-        }
+  .clients {
+    .clients-text {
+      h2 {
+        font-size: 35px;
+      }
+      p {
+        font-size: 20px;
+      }
     }
-    .client {
+  }
+  .client {
     padding: 30px 20px 44px 20px;
     width: 56vw;
     height: auto;
@@ -81,70 +84,125 @@
     display: flex;
     gap: 30px;
     img {
-        border-radius: 30px;
-        height: 333px;
+      border-radius: 30px;
+      height: 333px;
     }
     .client-text {
-        h3 {
-            font-size: 32px;
-        }
-        span {
-            font-size: 24px;
-
-        }
-        p {
-            font-size: 16px;
-        }
+      h3 {
+        font-size: 32px;
+      }
+      span {
+        font-size: 24px;
+      }
+      p {
+        font-size: 16px;
+      }
     }
+  }
 }
-}
+
 @media (max-width: 820px) {
-    .clients {
-        padding: 50px 17px;
-    }
-    .client {
-        width: 100vw;
-    }
+  .clients {
+    padding: 50px 17px;
+  }
+  .client {
+    width: 100vw;
+  }
 }
-@media (max-width: 480px) {
-    .clients {
-        .clients-text {
-            h2 {
-                font-size: 20px;
-            }
-            p {
-            font-size: 16px;
-        }
-        }
-    }
-    .clients-catalog {
-        .swiper-slide {
-            height: 215px;
-        }
-    }
-            .client {
-                height: 333px;
-                img {
-                    width: 100px;
-                    height: 170px;
-                }
-            }
-    .client {
-        img {
-            width: 125px;
-            height: 170px;
-        }
-    .client-text {
-        h3 {
-            font-size: 18px;
-        }
-        span {
-            font-size: 16px;
 
-        }
-        p {
-            font-size: 10px;
-        }
+@media (max-width: 768px) {
+  .client {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px 15px 30px 15px;
+    gap: 20px;
+
+    img {
+      height: 200px;
+      width: 150px;
+      object-fit: cover;
     }
+
+    .client-text {
+      h3 {
+        font-size: 22px;
+      }
+      span {
+        font-size: 16px;
+      }
+      p {
+        font-size: 14px;
+        margin-top: 15px;
+        line-height: 1.4;
+      }
+    }
+  }
 }
+
+@media (max-width: 480px) {
+  .clients {
+    .clients-text {
+      h2 {
+        font-size: 20px;
+      }
+      p {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .clients-catalog {
+    .swiper-slide {
+      height: auto;
+    }
+  }
+
+  .client {
+    height: auto;
+    min-height: 300px;
+    padding: 15px 10px 20px 10px;
+
+    img {
+      width: 120px;
+      height: 160px;
+    }
+
+    .client-text {
+      h3 {
+        font-size: 18px;
+      }
+      span {
+        font-size: 14px;
+      }
+      p {
+        font-size: 12px;
+        margin-top: 10px;
+      }
+    }
+  }
+}
+
+@media (max-width: 375px) {
+  .client {
+    padding: 12px 8px 15px 8px;
+    gap: 15px;
+
+    img {
+      width: 100px;
+      height: 140px;
+    }
+
+    .client-text {
+      h3 {
+        font-size: 16px;
+      }
+      span {
+        font-size: 12px;
+      }
+      p {
+        font-size: 11px;
+      }
+    }
+  }
 }

@@ -43,7 +43,7 @@
         font-weight: 500;
         font-size: calcFluidFontSize(18, 30, 1000, 1920);
         width: 100%;
-        color: #0091C9;
+        color: #0091c9;
       }
     }
     .hero-button {
@@ -82,7 +82,6 @@
     font-size: calcFluidFontSize(25, 40, 1200, 1920);
     font-weight: 400px;
     margin-top: calcFluidFontSize(50, 96, 1200, 1920);
-    
   }
   .hero-advantage {
     width: 100%;
@@ -210,14 +209,14 @@
     .hero-content {
       padding: 0 17px;
       justify-content: start;
-        .woman-img {
-          height: 90vh;
-          width: 800px;
-          left: 34vw !important;
-        }
+      .woman-img {
+        height: 90vh;
+        width: 800px;
+        left: 34vw !important;
+      }
       .hero-slogan {
         gap: 10px;
-        margin-top: 110px;
+        margin-top: 150px;
         width: 100%;
         h1 {
           font-size: 20px;
@@ -236,8 +235,8 @@
           width: 100%;
         }
         svg {
-        width: 55px;
-        height: 55px;
+          width: 55px;
+          height: 55px;
         }
       }
     }
@@ -269,9 +268,13 @@
     }
   }
 }
-@media (max-width: 380px) {
+
+@media (max-width: 400px) {
   .hero {
     .hero-content {
+      .hero-slogan {
+        margin-top: 110px;
+      }
       .hero-button {
         margin-top: 25px;
       }
