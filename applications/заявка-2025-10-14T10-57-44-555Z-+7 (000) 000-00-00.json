@@ -1,0 +1,16 @@
+{
+  "user": "Юридическое лицо",
+  "service": "Генеральная уборка",
+  "rooms": "2",
+  "square": 50,
+  "name": "maks",
+  "phone": "+7 (000) 000-00-00",
+  "comment": "dfd",
+  "additionalservices": [
+    "Мытьё микроволновой печи"
+  ],
+  "totalPrice": 10500,
+  "basePrice": 10000,
+  "additionalPrice": 500,
+  "timestamp": "2025-10-14T10:57:43.784Z"
+}

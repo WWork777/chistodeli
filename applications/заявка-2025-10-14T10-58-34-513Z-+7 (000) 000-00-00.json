@@ -1,0 +1,16 @@
+{
+  "user": "Физическое лицо",
+  "service": "Генеральная уборка",
+  "rooms": "2",
+  "square": 50,
+  "name": "maks",
+  "phone": "+7 (000) 000-00-00",
+  "comment": "erre",
+  "additionalservices": [
+    "Уборка балкона с мытьем окон"
+  ],
+  "totalPrice": 22500,
+  "basePrice": 20000,
+  "additionalPrice": 2500,
+  "timestamp": "2025-10-14T10:58:34.137Z"
+}
