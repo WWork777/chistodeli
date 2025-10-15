@@ -332,7 +332,7 @@
 .formInput,
 .formTextarea {
   padding: 12px 16px;
-  border: 1px solid #d1d5db;
+  border: 1px solid #0091C9;
   border-radius: 8px;
   font-size: 16px;
   font-family: inherit;
@@ -369,15 +369,6 @@
 
   &:hover {
     background: #059669;
-  }
-
-  &:disabled {
-    background: #9ca3af;
-    cursor: not-allowed;
-
-    &:hover {
-      background: #9ca3af;
-    }
   }
 }
 

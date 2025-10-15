@@ -8,7 +8,7 @@ export default function CleaningCalculator() {
     user: 'Физическое лицо',
     service: 'Генеральная уборка',
     rooms: '1',
-    square: 50,
+    square: 1,
     name: '',
     phone: '+7',
     comment: '',
@@ -275,7 +275,7 @@ export default function CleaningCalculator() {
           user: 'Физическое лицо',
           service: 'Генеральная уборка',
           rooms: '1',
-          square: 50,
+          square: 1,
           name: '',
           phone: '+7',
           comment: '',
@@ -529,7 +529,7 @@ export default function CleaningCalculator() {
           className={styles.orderButton}
           disabled={isSubmitting || !formData.name || !formData.phone}
         >
-          {isSubmitting ? 'Отправка...' : 'Заказать уборку'}
+          {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
         </button>
         <p className={styles.privacy}>
           Нажимая на кнопку, вы соглашаетесь с Политикой конфиденциальности

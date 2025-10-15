@@ -37,18 +37,6 @@ export function Header({ onOpenOffcanvas }) {
     return (
         <header className={"header" + (!isVisible ? " hidden" : '') + (hasBackground ? " withBackground" : '')}>
             <div className="header-logo"><Image src={logo} width={210} height={95} alt="Чистоделы"></Image></div>
-            <svg 
-                className="burger" 
-                onClick={onOpenOffcanvas}
-                id="Line" 
-                enableBackground="new 0 0 32 32" 
-                viewBox="0 0 32 32" 
-                xmlns="http://www.w3.org/2000/svg"
-            >
-                <path id="XMLID_174_" d="m26 16c0 .552-.448 1-1 1h-18c-.552 0-1-.448-1-1s.448-1 1-1h18c.552 0 1 .448 1 1z" fill="#000000" ></path>
-                <path id="XMLID_176_" d="m26 25c0 .553-.448 1-1 1h-18c-.552 0-1-.447-1-1s.448-1 1-1h18c.552 0 1 .447 1 1z" fill="#000000" ></path>
-                <path id="XMLID_178_" d="m6 7c0-.552.448-1 1-1h18c.552 0 1 .448 1 1s-.448 1-1 1h-18c-.552 0-1-.448-1-1z" fill="#000000" ></path>
-            </svg>
             <nav className="navigate-menu">
                 <div className="menu">
                     <Link href={"#services"}>Услуги</Link>
@@ -122,6 +110,18 @@ export function Header({ onOpenOffcanvas }) {
                     </div>
                 </div>
             </nav>
+            <svg 
+                className="burger" 
+                onClick={onOpenOffcanvas}
+                id="Line" 
+                enableBackground="new 0 0 32 32" 
+                viewBox="0 0 32 32" 
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path id="XMLID_174_" d="m26 16c0 .552-.448 1-1 1h-18c-.552 0-1-.448-1-1s.448-1 1-1h18c.552 0 1 .448 1 1z" fill="#000000" ></path>
+                <path id="XMLID_176_" d="m26 25c0 .553-.448 1-1 1h-18c-.552 0-1-.447-1-1s.448-1 1-1h18c.552 0 1 .447 1 1z" fill="#000000" ></path>
+                <path id="XMLID_178_" d="m6 7c0-.552.448-1 1-1h18c.552 0 1 .448 1 1s-.448 1-1 1h-18c-.552 0-1-.448-1-1z" fill="#000000" ></path>
+            </svg>
         </header>
     )
 }

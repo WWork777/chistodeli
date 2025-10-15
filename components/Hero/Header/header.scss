@@ -112,8 +112,28 @@ header {
 }
 @media (max-width: 1200px) {
     header {
+        background: rgba(256, 256, 256, .3);
+        border-radius: 35px;
+        margin-top: 10px;
         > .navigate-menu {
-        display: none;
+            width: 40%;
+            height: 50px;
+            .phone-city {
+                display: none;
+            }
+            .menu {
+                display: none;
+            }
+            .contacts {
+                width: 100%;
+                justify-content: center;
+                .icons {
+                    flex-direction: row-reverse;
+                }
+            }
+            .header-logo {
+                display: flex;
+            }
         }
         .burger {
             display: block;
@@ -125,6 +145,8 @@ header {
         .header-logo {
         width: 105px;
         height: 43px;
+        }
+        .navigate-menu {
         }
     }
 }
