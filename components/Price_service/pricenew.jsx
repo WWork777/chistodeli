@@ -314,7 +314,7 @@ export default function CleaningCalculator() {
   }
 
   return (
-    <div className={styles.calculator}>
+    <div className={styles.calculator} id="calculate">
       <h1 className={styles.title}>Рассчитать уборку</h1>
 
       {/* Тип лица */}

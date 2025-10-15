@@ -12,11 +12,10 @@ export function ExampleWorks() {
     { id: 2, img: "examplesWorks_2.webp" },
     { id: 3, img: "examplesWorks_3.webp" },
     { id: 4, img: "examplesWorks_4.webp" },
-    { id: 5, img: "examplesWorks_1.webp" },
-    { id: 6, img: "examplesWorks_1.webp" },
-    { id: 7, img: "examplesWorks_1.webp" },
-    { id: 8, img: "examplesWorks_1.webp" },
-    { id: 9, img: "examplesWorks_1.webp" },
+    { id: 5, img: "examplesWorks_5.webp" },
+    { id: 6, img: "examplesWorks_6.webp" },
+    { id: 7, img: "examplesWorks_7.webp" },
+    { id: 8, img: "examplesWorks_8.webp" },
   ];
 
   return (

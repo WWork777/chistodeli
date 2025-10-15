@@ -290,8 +290,9 @@
             gap: 10px;
             .user-service {
                 border-radius: 25px;
-                padding: 5px 10px 30px 10px;
                 height: 120px;
+                padding: 5px 5px 10px 10px;
+                gap: 75%;
                 .consultation-button {
                     // a {
                     //     width: 100%;
@@ -317,7 +318,6 @@
             .user-service {
                 width: 47%;
                 border-radius: 25px;
-                padding: 5px 5px 30px 10px;
                 .consultation-button {
                     a {
                         width: 100%;

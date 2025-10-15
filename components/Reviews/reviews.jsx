@@ -72,7 +72,7 @@ export function Reviews(){
                                     <p className='numbers-thin'>{activeButton === 1 ? "52" : "24"} оценок</p>
                                 </div>
                             </div>
-                            <a href='https://2gis.ru/kemerovo/firm/70000001081194421?m=86.102139%2C55.393166%2F16' className='go-review'>Оставить отзыв</a>
+                            <a href={activeButton === 1 ? "https://2gis.ru/kemerovo/firm/70000001081194421?m=86.102139%2C55.393166%2F16" : "https://yandex.ru/maps/org/chistodely/5737147181/reviews/?ll=86.102437%2C55.393060&rl=86.102287%2C55.393149&rlt=area&z=21"} className='go-review'>Оставить отзыв</a>
                         </div>
                 </div>
                         <div className='reviews-2gis-yandex'>
