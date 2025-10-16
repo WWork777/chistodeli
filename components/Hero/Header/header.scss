@@ -119,7 +119,22 @@ header {
             width: 40%;
             height: 50px;
             .phone-city {
-                display: none;
+                .phone {
+                    a:first-child {
+                        width: 29px;
+                        height: 29px;
+                        svg {
+                            width: 29px;
+                            height: 29px; 
+                        }
+                    }
+                    a:last-child {
+                        display: none !important;
+                    }
+                }
+                .city {
+                    display: none !important;
+                }
             }
             .menu {
                 display: none;
@@ -127,8 +142,12 @@ header {
             .contacts {
                 width: 100%;
                 justify-content: center;
+                gap: 10px;
                 .icons {
                     flex-direction: row-reverse;
+                    a:last-child {
+                        display: none;
+                    }
                 }
             }
             .header-logo {
