@@ -11,7 +11,7 @@ export function Promoutions() {
                     <div className="promoution-card">
                         <div className="promoution">
                             <Image src={promoution_1} width={715} height={300} alt="Скидка 20% напервую уборку" />
-                            <p><b>Скидка 20%</b><br/>напервую уборку</p>
+                            <p><b>Скидка 20%</b><br/>на первую уборку</p>
                         </div>
                         <div className="promoution">
                             <Image src={promoution_2} width={715} height={300} alt="Скидка 10% дляновосёлов" />

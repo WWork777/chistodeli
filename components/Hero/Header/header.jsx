@@ -62,15 +62,6 @@ export function Header({ onOpenOffcanvas }) {
                             </Link>
                             <Link href={"tel:+79050783111"}>+7 (905) 078-31-11 </Link>
                         </div>
-                        <div className="city">
-                            <select name="options" id="exampleSelect">  
-                                <option value="volvo">Кемерово</option>  
-                                <option value="saab">Нижний Новгород</option>  
-                                <option value="fiat">Саратов</option>  
-                                <option value="audi">Сочи</option>
-                                <option value="audi">Калининград</option>  
-                            </select>
-                        </div>
                     </div>
                     <div className="icons">
                         <Link className="icon" href={"https://t.me/TanushaSmir"}>

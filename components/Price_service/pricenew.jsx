@@ -149,7 +149,7 @@ export default function CleaningCalculator() {
 
   // Расчет базовой стоимости
   const calculateBasePrice = () => {
-    const pricePerSquare = formData.user === 'Юридическое лицо' ? 200 : 400;
+    const pricePerSquare = 250;
     return formData.square * pricePerSquare;
   };
 
