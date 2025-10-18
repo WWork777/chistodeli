@@ -1,7 +1,7 @@
 // components/PrivacyPolicyModal.js
 import { useEffect } from 'react';
 
-export function PrivacyPolicyModal({ isOpen, onClose }) {
+export default function PrivacyPolicyModal({ isOpen, onClose }) {
   // Блокировка скролла при открытой модалке
   useEffect(() => {
     if (isOpen) {
@@ -32,49 +32,169 @@ export function PrivacyPolicyModal({ isOpen, onClose }) {
     };
   }, [isOpen, onClose]);
 
+  // Стили
+  const styles = {
+    overlay: {
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'flex-start',
+      padding: '20px',
+      zIndex: 1000,
+      overflowY: 'auto'
+    },
+    container: {
+      background: 'white',
+      borderRadius: '8px',
+      boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)',
+      maxWidth: '800px',
+      width: '100%',
+      margin: '40px auto',
+      maxHeight: '90vh',
+      display: 'flex',
+      flexDirection: 'column'
+    },
+    header: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      padding: '20px 24px',
+      borderBottom: '1px solid #e5e7eb',
+      backgroundColor: '#f9fafb'
+    },
+    title: {
+      fontSize: '24px',
+      fontWeight: 'bold',
+      color: '#1f2937',
+      margin: 0
+    },
+    closeBtn: {
+      background: 'none',
+      border: 'none',
+      fontSize: '28px',
+      color: '#6b7280',
+      cursor: 'pointer',
+      padding: 0,
+      width: '32px',
+      height: '32px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+    content: {
+      padding: '24px',
+      overflowY: 'auto',
+      flex: 1,
+      maxHeight: '60vh'
+    },
+    footer: {
+      display: 'flex',
+      justifyContent: 'flex-end',
+      padding: '20px 24px',
+      borderTop: '1px solid #e5e7eb',
+      backgroundColor: '#f9fafb'
+    },
+    confirmBtn: {
+      backgroundColor: '#2563eb',
+      color: 'white',
+      border: 'none',
+      padding: '10px 24px',
+      borderRadius: '6px',
+      fontSize: '14px',
+      fontWeight: '500',
+      cursor: 'pointer'
+    },
+    // Стили для контента политики
+    updateDate: {
+      fontSize: '14px',
+      color: '#6b7280',
+      marginBottom: '20px'
+    },
+    intro: {
+      marginBottom: '24px',
+      fontSize: '16px',
+      lineHeight: '1.6'
+    },
+    sectionTitle: {
+      fontSize: '18px',
+      fontWeight: '600',
+      color: '#1f2937',
+      margin: '24px 0 12px 0'
+    },
+    paragraph: {
+      marginBottom: '16px',
+      fontSize: '15px',
+      lineHeight: '1.6'
+    },
+    subparagraph: {
+      marginBottom: '12px',
+      fontSize: '15px',
+      lineHeight: '1.6',
+      paddingLeft: '16px'
+    },
+    list: {
+      margin: '12px 0',
+      paddingLeft: '32px'
+    },
+    listItem: {
+      marginBottom: '8px',
+      fontSize: '15px',
+      lineHeight: '1.5'
+    }
+  };
+
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center p-4 bg-black bg-opacity-50 overflow-y-auto">
-      <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full my-8">
+    <div style={styles.overlay} onClick={onClose}>
+      <div style={styles.container} onClick={(e) => e.stopPropagation()}>
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b">
-          <h2 className="text-2xl font-bold text-gray-800">Политика конфиденциальности</h2>
+        <div style={styles.header}>
+          <h2 style={styles.title}>Политика конфиденциальности</h2>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 text-3xl font-light"
+            style={styles.closeBtn}
+            onMouseEnter={(e) => e.target.style.color = '#374151'}
+            onMouseLeave={(e) => e.target.style.color = '#6b7280'}
           >
             ×
           </button>
         </div>
         
         {/* Content */}
-        <div className="p-6 max-h-[70vh] overflow-y-auto">
-          <div className="prose prose-lg max-w-none text-gray-700">
-            <p className="text-sm text-gray-600 mb-6">Последнее обновление: 17.10.2025</p>
+        <div style={styles.content}>
+          <div style={{ color: '#374151', lineHeight: '1.6' }}>
+            <p style={styles.updateDate}>Последнее обновление: 17.10.2025</p>
             
-            <p className="mb-6">
+            <p style={styles.intro}>
               Настоящая Политика конфиденциальности персональных данных (далее — Политика конфиденциальности) 
               действует в отношении всей информации, которую данный сайт, на котором размещен текст этой Политики 
               конфиденциальности, может получить о Пользователе, а также любых программ и продуктов, размещенных на нем.
             </p>
 
-            <h3 className="text-lg font-semibold mt-6 mb-3">1. Определение терминов</h3>
-            <p className="mb-4"><strong>1.1</strong> В настоящей Политике конфиденциальности используются следующие термины:</p>
+            <h3 style={styles.sectionTitle}>1. Определение терминов</h3>
+            <p style={styles.paragraph}>
+              <strong>1.1</strong> В настоящей Политике конфиденциальности используются следующие термины:
+            </p>
             
-            <p className="mb-2 ml-4">
+            <p style={styles.subparagraph}>
               <strong>1.1.1.</strong> «Администрация сайта» – уполномоченные сотрудники на управления сайтом, 
               действующие от его имени, которые организуют и (или) осуществляет обработку персональных данных, 
               а также определяет цели обработки персональных данных, состав персональных данных, подлежащих обработке, 
               действия (операции), совершаемые с персональными данными.
             </p>
             
-            <p className="mb-2 ml-4">
+            <p style={styles.subparagraph}>
               <strong>1.1.2.</strong> «Персональные данные» — любая информация, относящаяся к прямо или косвенно 
               определенному или определяемому физическому лицу (субъекту персональных данных).
             </p>
             
-            <p className="mb-2 ml-4">
+            <p style={styles.subparagraph}>
               <strong>1.1.3.</strong> «Обработка персональных данных» — любое действие (операция) или совокупность 
               действий (операций), совершаемых с использованием средств автоматизации или без использования таких 
               средств с персональными данными, включая сбор, запись, систематизацию, накопление, хранение, уточнение 
@@ -82,190 +202,190 @@ export function PrivacyPolicyModal({ isOpen, onClose }) {
               обезличивание, блокирование, удаление, уничтожение персональных данных.
             </p>
 
-            <p className="mb-2 ml-4">
+            <p style={styles.subparagraph}>
               <strong>1.1.4.</strong> «Конфиденциальность персональных данных» — обязательное для соблюдения 
               Администрацией сайта требование не допускать их умышленного распространения без согласия субъекта 
               персональных данных или наличия иного законного основания.
             </p>
 
-            <p className="mb-2 ml-4">
+            <p style={styles.subparagraph}>
               <strong>1.1.5.</strong> «Пользователь сайта (далее Пользователь)» – лицо, имеющее доступ к сайту, 
               посредством сети Интернет и использующее данный сайт для своих целей.
             </p>
 
-            <p className="mb-2 ml-4">
+            <p style={styles.subparagraph}>
               <strong>1.1.6.</strong> «Cookies» — небольшой фрагмент данных, отправленный веб-сервером и хранимый 
               на компьютере пользователя, который веб-клиент или веб-браузер каждый раз пересылает веб-серверу в 
               HTTP-запросе при попытке открыть страницу соответствующего сайта.
             </p>
 
-            <p className="mb-4 ml-4">
+            <p style={styles.subparagraph}>
               <strong>1.1.7.</strong> «IP-адрес» — уникальный сетевой адрес узла в компьютерной сети, построенной по протоколу IP.
             </p>
 
-            <h3 className="text-lg font-semibold mt-6 mb-3">2. Общие положения</h3>
-            <p className="mb-4">
+            <h3 style={styles.sectionTitle}>2. Общие положения</h3>
+            <p style={styles.paragraph}>
               <strong>2.1.</strong> Использование Пользователем сайта означает согласие с настоящей Политикой 
               конфиденциальности и условиями обработки персональных данных Пользователя.
             </p>
             
-            <p className="mb-4">
+            <p style={styles.paragraph}>
               <strong>2.2.</strong> В случае несогласия с условиями Политики конфиденциальности Пользователь 
               должен прекратить использование сайта.
             </p>
 
-            <p className="mb-4">
+            <p style={styles.paragraph}>
               <strong>2.3.</strong> Настоящая Политика конфиденциальности применяется только к данному сайту. 
               Администрация сайта не контролирует и не несет ответственность за сайты третьих лиц, на которые 
               Пользователь может перейти по ссылкам, доступным на данном сайте.
             </p>
 
-            <p className="mb-4">
+            <p style={styles.paragraph}>
               <strong>2.4.</strong> Администрация сайта не проверяет достоверность персональных данных, 
               предоставляемых Пользователем сайта.
             </p>
 
-            <h3 className="text-lg font-semibold mt-6 mb-3">3. Предмет политики конфиденциальности</h3>
-            <p className="mb-4">
+            <h3 style={styles.sectionTitle}>3. Предмет политики конфиденциальности</h3>
+            <p style={styles.paragraph}>
               <strong>3.1.</strong> Настоящая Политика конфиденциальности устанавливает обязательства Администрации 
               сайта по умышленному неразглашению персональных данных, которые Пользователь предоставляет по 
               разнообразным запросам Администрации сайта (например, при регистрации на сайте, оформлении заказа, 
               подписки на уведомления и т.п).
             </p>
 
-            <p className="mb-4">
+            <p style={styles.paragraph}>
               <strong>3.2.</strong> Персональные данные, разрешённые к обработке в рамках настоящей Политики 
               конфиденциальности, предоставляются Пользователем путём заполнения специальных форм на Сайте и 
               обычно включают в себя следующую информацию:
             </p>
 
-            <ul className="list-disc ml-8 mb-4">
-              <li>Имя Пользователя;</li>
-              <li>Контактный телефон Пользователя;</li>
-              <li>Адрес электронной почты (e-mail);</li>
+            <ul style={styles.list}>
+              <li style={styles.listItem}>Имя Пользователя;</li>
+              <li style={styles.listItem}>Контактный телефон Пользователя;</li>
+              <li style={styles.listItem}>Адрес электронной почты (e-mail);</li>
             </ul>
 
-            <p className="mb-4">
+            <p style={styles.paragraph}>
               <strong>3.3.</strong> Администрация сайта также принимает усилия по защите Персональных данных, 
               которые автоматически передаются в процессе посещения страниц сайта: IP адрес; информация из cookies; 
               информация о браузере (или иной программе, которая осуществляет доступ к сайту); время доступа; 
               посещенные адреса страниц; реферер (адрес предыдущей страницы) и т.п.
             </p>
 
-            <p className="mb-4">
+            <p style={styles.paragraph}>
               <strong>3.3.1.</strong> Отключение cookies может повлечь невозможность доступа к сайту.
             </p>
 
-            <p className="mb-4">
+            <p style={styles.paragraph}>
               <strong>3.3.2.</strong> Сайт осуществляет сбор статистики об IP-адресах своих посетителей. 
               Данная информация используется с целью выявления и решения технических проблем, для контроля 
               корректности проводимых операций.
             </p>
 
-            <p className="mb-4">
+            <p style={styles.paragraph}>
               <strong>3.4.</strong> Любая иная персональная информация не оговоренная выше (история покупок, 
               используемые браузеры и операционные системы и т.д.) не подлежит умышленному разглашению, за 
               исключением случаев, предусмотренных в п.п. 5.2. и 5.3. настоящей Политики конфиденциальности.
             </p>
 
-            <h3 className="text-lg font-semibold mt-6 mb-3">4. Цели сбора персональной информации пользователя</h3>
-            <p className="mb-4">
+            <h3 style={styles.sectionTitle}>4. Цели сбора персональной информации пользователя</h3>
+            <p style={styles.paragraph}>
               <strong>4.1.</strong> Персональные данные Пользователя Администрация сайта может использовать в целях:
             </p>
 
-            <ul className="list-disc ml-8 mb-4">
-              <li>Установления с Пользователем обратной связи, включая направление уведомлений, запросов, касающихся использования сайта, оказания услуг, обработка запросов и заявок от Пользователя.</li>
-              <li>Подтверждения достоверности и полноты персональных данных, предоставленных Пользователем.</li>
-              <li>Уведомления Пользователя сайта о состоянии Заказа.</li>
-              <li>Предоставления Пользователю эффективной клиентской и технической поддержки при возникновении проблем связанных с использованием сайта.</li>
+            <ul style={styles.list}>
+              <li style={styles.listItem}>Установления с Пользователем обратной связи, включая направление уведомлений, запросов, касающихся использования сайта, оказания услуг, обработка запросов и заявок от Пользователя.</li>
+              <li style={styles.listItem}>Подтверждения достоверности и полноты персональных данных, предоставленных Пользователем.</li>
+              <li style={styles.listItem}>Уведомления Пользователя сайта о состоянии Заказа.</li>
+              <li style={styles.listItem}>Предоставления Пользователю эффективной клиентской и технической поддержки при возникновении проблем связанных с использованием сайта.</li>
             </ul>
 
-            <h3 className="text-lg font-semibold mt-6 mb-3">5. Способы и сроки обработки персональной информации</h3>
-            <p className="mb-4">
+            <h3 style={styles.sectionTitle}>5. Способы и сроки обработки персональной информации</h3>
+            <p style={styles.paragraph}>
               <strong>5.1.</strong> Обработка персональных данных Пользователя осуществляется без ограничения срока, 
               любым законным способом, в том числе в информационных системах персональных данных с использованием 
               средств автоматизации или без использования таких средств.
             </p>
 
-            <p className="mb-4">
+            <p style={styles.paragraph}>
               <strong>5.2.</strong> Пользователь соглашается с тем, что Администрация сайта вправе передавать 
               персональные данные третьим лицам, в частности, курьерским службам, организациями почтовой связи, 
               операторам электросвязи, исключительно в целях выполнения заявок Пользователя.
             </p>
 
-            <p className="mb-4">
+            <p style={styles.paragraph}>
               <strong>5.3.</strong> Персональные данные Пользователя могут быть переданы уполномоченным органам 
               государственной власти только по основаниям и в порядке, установленным действующим законодательством.
             </p>
 
-            <h3 className="text-lg font-semibold mt-6 mb-3">6. Обязательства сторон</h3>
-            <p className="mb-4"><strong>6.1. Пользователь обязуется:</strong></p>
-            <ul className="list-disc ml-8 mb-4">
-              <li>Предоставить корректную и правдивую информацию о персональных данных, необходимую для пользования сайтом.</li>
-              <li>Обновить или дополнить предоставленную информацию о персональных данных в случае изменения данной информации.</li>
-              <li>Принимать меры для защиты доступа к своим конфиденциальным данным, хранящимся на сайте.</li>
+            <h3 style={styles.sectionTitle}>6. Обязательства сторон</h3>
+            <p style={styles.paragraph}><strong>6.1. Пользователь обязуется:</strong></p>
+            <ul style={styles.list}>
+              <li style={styles.listItem}>Предоставить корректную и правдивую информацию о персональных данных, необходимую для пользования сайтом.</li>
+              <li style={styles.listItem}>Обновить или дополнить предоставленную информацию о персональных данных в случае изменения данной информации.</li>
+              <li style={styles.listItem}>Принимать меры для защиты доступа к своим конфиденциальным данным, хранящимся на сайте.</li>
             </ul>
 
-            <p className="mb-4"><strong>6.2. Администрация сайта обязуется:</strong></p>
-            <ul className="list-disc ml-8 mb-4">
-              <li>Использовать полученную информацию исключительно для целей, указанных в п. 4 настоящей Политики конфиденциальности.</li>
-              <li>Не разглашать персональных данных Пользователя, за исключением п.п. 5.2. и 5.3. настоящей Политики Конфиденциальности.</li>
-              <li>Осуществить блокирование персональных данных, относящихся к соответствующему Пользователю, с момента обращения или запроса Пользователя или его законного представителя либо уполномоченного органа по защите прав субъектов персональных данных на период проверки, в случае выявления неправомерных действий.</li>
+            <p style={styles.paragraph}><strong>6.2. Администрация сайта обязуется:</strong></p>
+            <ul style={styles.list}>
+              <li style={styles.listItem}>Использовать полученную информацию исключительно для целей, указанных в п. 4 настоящей Политики конфиденциальности.</li>
+              <li style={styles.listItem}>Не разглашать персональных данных Пользователя, за исключением п.п. 5.2. и 5.3. настоящей Политики Конфиденциальности.</li>
+              <li style={styles.listItem}>Осуществить блокирование персональных данных, относящихся к соответствующему Пользователю, с момента обращения или запроса Пользователя или его законного представителя либо уполномоченного органа по защите прав субъектов персональных данных на период проверки, в случае выявления неправомерных действий.</li>
             </ul>
 
-            <h3 className="text-lg font-semibold mt-6 mb-3">7. Ответственность сторон</h3>
-            <p className="mb-4">
+            <h3 style={styles.sectionTitle}>7. Ответственность сторон</h3>
+            <p style={styles.paragraph}>
               <strong>7.1.</strong> Администрация сайта несёт ответственность за умышленное разглашение Персональных 
               данных Пользователя в соответствии с действующим законодательством, за исключением случаев, предусмотренных 
               п.п. 5.2., 5.3. и 7.2. настоящей Политики Конфиденциальности.
             </p>
 
-            <p className="mb-4">
+            <p style={styles.paragraph}>
               <strong>7.2.</strong> В случае утраты или разглашения Персональных данных Администрация сайта не несёт 
               ответственность, если данная конфиденциальная информация:
             </p>
 
-            <ul className="list-disc ml-8 mb-4">
-              <li>Стала публичным достоянием до её утраты или разглашения.</li>
-              <li>Была получена от третьей стороны до момента её получения Администрацией сайта.</li>
-              <li>Была получена третьими лицами путем несанкционированного доступа к файлам сайта.</li>
-              <li>Была разглашена с согласия Пользователя.</li>
+            <ul style={styles.list}>
+              <li style={styles.listItem}>Стала публичным достоянием до её утраты или разглашения.</li>
+              <li style={styles.listItem}>Была получена от третьей стороны до момента её получения Администрацией сайта.</li>
+              <li style={styles.listItem}>Была получена третьими лицами путем несанкционированного доступа к файлам сайта.</li>
+              <li style={styles.listItem}>Была разглашена с согласия Пользователя.</li>
             </ul>
 
-            <p className="mb-4">
+            <p style={styles.paragraph}>
               <strong>7.3.</strong> Пользователь несет ответственность за правомерность, корректность и правдивость 
               предоставленной Персональных данных в соответствии с действующим законодательством.
             </p>
 
-            <h3 className="text-lg font-semibold mt-6 mb-3">8. Разрешение споров</h3>
-            <p className="mb-4">
+            <h3 style={styles.sectionTitle}>8. Разрешение споров</h3>
+            <p style={styles.paragraph}>
               <strong>8.1.</strong> До обращения в суд с иском по спорам, возникающим из отношений между Пользователем 
               сайта и Администрацией сайта, обязательным является предъявление претензии (письменного предложения 
               о добровольном урегулировании спора).
             </p>
 
-            <p className="mb-4">
+            <p style={styles.paragraph}>
               <strong>8.2.</strong> Получатель претензии в течение 30 календарных дней со дня получения претензии, 
               письменно уведомляет заявителя претензии о результатах рассмотрения претензии.
             </p>
 
-            <p className="mb-4">
+            <p style={styles.paragraph}>
               <strong>8.3.</strong> При недостижении соглашения спор будет передан на рассмотрение в судебный орган 
               в соответствии с действующим законодательством.
             </p>
 
-            <p className="mb-4">
+            <p style={styles.paragraph}>
               <strong>8.4.</strong> К настоящей Политике конфиденциальности и отношениям между Пользователем и 
               Администрацией сайта применяется действующее законодательство.
             </p>
 
-            <h3 className="text-lg font-semibold mt-6 mb-3">9. Дополнительные условия</h3>
-            <p className="mb-4">
+            <h3 style={styles.sectionTitle}>9. Дополнительные условия</h3>
+            <p style={styles.paragraph}>
               <strong>9.1.</strong> Администрация сайта вправе вносить изменения в настоящую Политику конфиденциальности 
               без согласия Пользователя.
             </p>
 
-            <p className="mb-4">
+            <p style={styles.paragraph}>
               <strong>9.2.</strong> Новая Политика конфиденциальности вступает в силу с момента ее размещения на Сайте, 
               если иное не предусмотрено новой редакцией Политики конфиденциальности.
             </p>
@@ -273,10 +393,12 @@ export function PrivacyPolicyModal({ isOpen, onClose }) {
         </div>
 
         {/* Footer */}
-        <div className="flex justify-end p-6 border-t bg-gray-50">
+        <div style={styles.footer}>
           <button
             onClick={onClose}
-            className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            style={styles.confirmBtn}
+            onMouseEnter={(e) => e.target.style.backgroundColor = '#1d4ed8'}
+            onMouseLeave={(e) => e.target.style.backgroundColor = '#2563eb'}
           >
             Закрыть
           </button>
