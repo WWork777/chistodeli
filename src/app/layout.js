@@ -1,3 +1,4 @@
+import CookieConsent from "../../components/Cookie/cookie";
 import YandexMetrika from "../../components/YandexMetrika/YandexMEtrika";
 
 export const metadata = {
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
       <body>
         {children}
         <YandexMetrika />
+        <CookieConsent />
       </body>
     </html>
   );

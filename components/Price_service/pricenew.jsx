@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import styles from './pricenew.module.scss';
+import PrivacyPolicyModal from './political_confidencial';
 
 export default function CleaningCalculator() {
+  const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     user: 'Физическое лицо',
     service: 'Генеральная уборка',
@@ -314,6 +316,7 @@ export default function CleaningCalculator() {
   }
 
   return (
+    <>
     <div className={styles.calculator} id="calculate">
       <h1 className={styles.title}>Рассчитать уборку</h1>
 
@@ -491,7 +494,7 @@ export default function CleaningCalculator() {
 
       {/* Данные */}
       <div className={styles.section}>
-        <h2 className={styles.sectionTitle}>Данные:</h2>
+        <h2 className={styles.sectionTitle}>Заполните заявку:</h2>
         <form onSubmit={handleSubmit} className={styles.form}>
           <input
             type="text"
@@ -532,9 +535,16 @@ export default function CleaningCalculator() {
           {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
         </button>
         <p className={styles.privacy}>
-          Нажимая на кнопку, вы соглашаетесь с Политикой конфиденциальности
+          Нажимая на кнопку, вы соглашаетесь с <button onClick={() => setIsPrivacyModalOpen(true)}>Политикой конфиденциальности</button>
         </p>
       </div>
     </div>
-  );
+    <div>
+      <PrivacyPolicyModal 
+        isOpen={isPrivacyModalOpen}
+        onClose={() => setIsPrivacyModalOpen(false)}
+      />
+    </div>
+    </>
+  )
 }

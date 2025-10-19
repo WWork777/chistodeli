@@ -1,0 +1,124 @@
+// components/CookieConsent.scss
+// Переменные
+$cookie-bg: #ffffff;
+$cookie-text: #374151;
+$cookie-link: #2563eb;
+$cookie-button-bg: #2563eb;
+$cookie-button-hover: #1d4ed8;
+$cookie-button-text: #ffffff;
+$cookie-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+$cookie-border: #e5e7eb;
+
+$border-radius: 8px;
+$transition: all 0.3s ease;
+
+.cookie-consent {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.5);
+  
+  &__container {
+    background: $cookie-bg;
+    border-radius: $border-radius;
+    box-shadow: $cookie-shadow;
+    padding: 20px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    border: 1px solid $cookie-border;
+    
+    @media (max-width: 768px) {
+      flex-direction: column;
+      text-align: center;
+      gap: 16px;
+      padding: 16px 20px;
+    }
+    
+    @media (max-width: 480px) {
+      padding: 12px 16px;
+    }
+  }
+
+  &__content {
+    flex: 1;
+  }
+
+  &__text {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: $cookie-text;
+    
+    @media (max-width: 480px) {
+      font-size: 13px;
+    }
+  }
+
+  &__link {
+    color: $cookie-link;
+    text-decoration: underline;
+    transition: $transition;
+    
+    &:hover {
+      color: $cookie-button-hover;
+    }
+  }
+
+  &__button {
+    background: $cookie-button-bg;
+    color: $cookie-button-text;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: $transition;
+    white-space: nowrap;
+    flex-shrink: 0;
+    
+    &:hover {
+      background: $cookie-button-hover;
+    }
+    
+    @media (max-width: 480px) {
+      width: 100%;
+      padding: 12px 24px;
+    }
+  }
+}
+
+// Анимация появления
+@keyframes cookieSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cookie-consent {
+  animation: cookieSlideUp 0.5s ease-out;
+}
+
+// Темная тема (опционально)
+@media (prefers-color-scheme: dark) {
+  .cookie-consent__container {
+    background: #1f2937;
+    border-color: #374151;
+  }
+
+  .cookie-consent__text {
+    color: #f9fafb;
+  }
+}

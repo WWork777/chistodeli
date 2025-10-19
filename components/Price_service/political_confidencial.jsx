@@ -389,6 +389,64 @@ export default function PrivacyPolicyModal({ isOpen, onClose }) {
               <strong>9.2.</strong> Новая Политика конфиденциальности вступает в силу с момента ее размещения на Сайте, 
               если иное не предусмотрено новой редакцией Политики конфиденциальности.
             </p>
+            <section className="privacy-policy__section">
+                <h3 className="privacy-policy__section-title">10. Использование файлов cookie</h3>
+                
+                <p className="privacy-policy__paragraph">
+                  <strong>10.1.</strong> Наш сайт использует файлы cookie и аналогичные технологии для обеспечения 
+                  корректной работы сайта, анализа трафика и улучшения пользовательского опыта.
+                </p>
+
+                <p className="privacy-policy__paragraph">
+                  <strong>10.2.</strong> Файлы cookie — это небольшие текстовые файлы, которые сохраняются на вашем 
+                  устройстве при посещении сайта. Они помогают сайту запоминать ваши действия и предпочтения.
+                </p>
+
+                <p className="privacy-policy__paragraph">
+                  <strong>10.3.</strong> Мы используем следующие типы cookie:
+                </p>
+
+                <ul className="privacy-policy__list">
+                  <li className="privacy-policy__list-item">
+                    <strong>Обязательные (essential) cookie:</strong> необходимы для работы основных функций сайта, 
+                    таких как навигация, безопасность и доступ к защищенным разделам. Эти cookie не могут быть отключены.
+                  </li>
+                  <li className="privacy-policy__list-item">
+                    <strong>Аналитические (analytical) cookie:</strong> помогают нам понимать, как посетители 
+                    взаимодействуют с сайтом, собирая информацию анонимно. Эти данные используются для улучшения 
+                    работы сайта.
+                  </li>
+                  <li className="privacy-policy__list-item">
+                    <strong>Функциональные (functional) cookie:</strong> позволяют сайту запоминать ваши предпочтения 
+                    (например, имя пользователя, язык, регион) и предоставлять улучшенные персонализированные функции.
+                  </li>
+                </ul>
+
+                <p className="privacy-policy__paragraph">
+                  <strong>10.4.</strong> Срок хранения cookie:
+                </p>
+                <ul className="privacy-policy__list">
+                  <li className="privacy-policy__list-item">Сессионные cookie: удаляются после закрытия браузера</li>
+                  <li className="privacy-policy__list-item">Постоянные cookie: сохраняются на устройстве до истечения срока их действия или ручного удаления</li>
+                </ul>
+
+                <p className="privacy-policy__paragraph">
+                  <strong>10.5.</strong> Управление cookie:
+                </p>
+                <p className="privacy-policy__paragraph">
+                  Вы можете управлять использованием cookie через настройки вашего браузера. Обратите внимание, что 
+                  отключение некоторых типов cookie может повлиять на функциональность сайта и ограничить доступ к 
+                  определенным функциям.
+                </p>
+
+                <p className="privacy-policy__paragraph">
+                  <strong>10.6.</strong> Согласие на использование cookie:
+                </p>
+                <p className="privacy-policy__paragraph">
+                  Продолжая использовать наш сайт, вы даёте согласие на использование файлов cookie в соответствии 
+                  с настоящей политикой. При первом посещении сайта вам будет предложено принять использование cookie.
+                </p>
+              </section>
           </div>
         </div>
 
