@@ -249,3 +249,162 @@
     pointer-events: none;
   }
 }
+/* Блокировка Swiper во время перетаскивания */
+body.dragging-active .swiper {
+  pointer-events: none !important;
+}
+
+body.dragging-active .swiper-wrapper {
+  pointer-events: none !important;
+}
+
+body.dragging-active .swiper-slide {
+  pointer-events: none !important;
+}
+
+/* Разрешаем события только для drag-handle */
+body.dragging-active .drag-handle {
+  pointer-events: all !important;
+}
+
+.image-comparison {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  user-select: none;
+  touch-action: none;
+}
+
+.image-left, .image-right {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.image-left {
+  left: 0;
+  z-index: 1;
+}
+
+.image-right {
+  right: 0;
+}
+
+.comparison-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.drag-handle {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000; /* Очень высокий z-index */
+  cursor: col-resize;
+  touch-action: none;
+  pointer-events: all;
+}
+
+.drag-handle.dragging {
+  cursor: grabbing;
+}
+
+.drag-handle svg {
+  display: block;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+.drag-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  cursor: col-resize;
+  background: transparent;
+}
+
+.image-comparison {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  user-select: none;
+}
+
+.image-left, .image-right {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.image-left {
+  left: 0;
+  z-index: 1;
+}
+
+.image-right {
+  right: 0;
+}
+
+.comparison-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.drag-handle {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  cursor: col-resize;
+  touch-action: none;
+}
+
+.drag-handle.dragging {
+  cursor: grabbing;
+}
+
+.drag-handle svg {
+  display: block;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+// Добавь эти стили в твой SCSS файл
+.works-catalog {
+  overflow: hidden;
+  position: relative;
+  
+  .swiper-wrapper {
+    overflow: hidden;
+  }
+  
+  .slides-container {
+    display: flex;
+    gap: 20px;
+    will-change: transform;
+  }
+}
+
+// Анимация для переключения слайдов
+.swiper-slide {
+  flex: 0 0 auto;
+  width: 225px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+// Плавная анимация трансформации
+.slides-container {
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+// Отключаем анимацию при перетаскивании
+.dragging ~ .swiper-wrapper .slides-container {
+  transition: none !important;
+}
