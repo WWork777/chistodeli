@@ -33,7 +33,7 @@
 body {
   width: 100vw;
   background: #FFF;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
 }
 button {
   &:hover {
