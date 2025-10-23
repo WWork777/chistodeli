@@ -50,8 +50,9 @@ export function ExampleWorks() {
   const ITEM_W = isMobile ? 160 : 225; // px
   const ITEM_H = 300; // px
   const GAP = 20; // px
+  let screenWidth = window.innerWidth;
   // HELPERS
-  const getPaddingRight = () => (isMobile ? 17 : Math.round(containerWidth * 0.12));
+  const getPaddingRight = () => (isMobile ? 17 : Math.round(screenWidth * 0.12));
   const calcMetrics = () => {
     const slideWidth = ITEM_W + GAP; // шаг
     const totalWidth = leftImages.length * slideWidth - GAP; // последний без GAP
