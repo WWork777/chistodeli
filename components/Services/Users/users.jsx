@@ -5,12 +5,29 @@ import "./users.scss";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
-export function Users({ initialService = 1 }) {
+export function Users() {
   const searchParams = useSearchParams();
   const tabParam = searchParams.get("tab");
   const [activeService, setActiveService] = useState(1);
   const [selectedService, setSelectedService] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (tabParam === "2") setActiveService(2);
+    else if (tabParam === "1") setActiveService(1);
+
+    const element = document.getElementById("services");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+
+    if (tabParam) {
+      setTimeout(() => {
+        const newUrl = window.location.pathname + "#services";
+        window.history.replaceState(null, "", newUrl);
+      }, 600);
+    }
+  }, [tabParam]);
 
   const serviceUser = [
     {
