@@ -19,6 +19,8 @@ export default function CleaningCalculator() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+  const [isPhoneValid, setIsPhoneValid] = useState(false);
 
   const additionalServices = [
     { 
@@ -244,18 +246,81 @@ export default function CleaningCalculator() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    
+    if (name === 'phone') {
+      let cleanedValue = value;
+      if (value.startsWith('+')) {
+        cleanedValue = '+' + value.slice(1).replace(/\D/g, '');
+      } else {
+        cleanedValue = value.replace(/\D/g, '');
+      }
+      
+      setFormData(prev => ({
+        ...prev,
+        [name]: cleanedValue
+      }));
+
+      let phoneDigits = cleanedValue;
+      if (cleanedValue.startsWith('+')) {
+        phoneDigits = cleanedValue.slice(1).replace(/\D/g, '');
+      } else {
+        phoneDigits = cleanedValue.replace(/\D/g, '');
+      }
+      
+      setIsPhoneValid(phoneDigits.length === 11);
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value
+      }));
+    }
+  };
+
+  const handlePaste = (e) => {
+    if (e.target.name === 'phone') {
+      const pastedText = e.clipboardData.getData('text');
+      
+      let cleanedValue = pastedText;
+      if (pastedText.startsWith('+')) {
+        cleanedValue = '+' + pastedText.slice(1).replace(/\D/g, '');
+      } else {
+        cleanedValue = pastedText.replace(/\D/g, '');
+      }
+      
+      setFormData(prev => ({
+        ...prev,
+        phone: cleanedValue
+      }));
+
+      let phoneDigits = cleanedValue;
+      if (cleanedValue.startsWith('+')) {
+        phoneDigits = cleanedValue.slice(1).replace(/\D/g, '');
+      } else {
+        phoneDigits = cleanedValue.replace(/\D/g, '');
+      }
+      
+      setIsPhoneValid(phoneDigits.length === 11);
+      e.preventDefault();
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    
+    let phoneDigits = formData.phone;
+    if (formData.phone.startsWith('+')) {
+      phoneDigits = formData.phone.slice(1).replace(/\D/g, '');
+    } else {
+      phoneDigits = formData.phone.replace(/\D/g, '');
+    }
+    
+    if (phoneDigits.length !== 11) {
+      alert('Номер телефона должен содержать 11 цифр');
+      return;
+    }
 
+    setIsSubmitting(true);
     try {
-      // Отправка данных на API endpoint
       const response = await fetch('/api/sendCleaningOrder', {
         method: 'POST',
         headers: {
@@ -272,7 +337,6 @@ export default function CleaningCalculator() {
 
       if (response.ok) {
         setIsSubmitted(true);
-        // Очистка формы после успешной отправки
         setFormData({
           user: 'Физическое лицо',
           service: 'Генеральная уборка',
@@ -510,6 +574,7 @@ export default function CleaningCalculator() {
             name="phone"
             value={formData.phone}
             onChange={handleInputChange}
+            onPaste={handlePaste}
             placeholder="Номер телефона"
             className={styles.formInput}
             required
@@ -530,13 +595,16 @@ export default function CleaningCalculator() {
         <button 
           onClick={handleSubmit} 
           className={styles.orderButton}
-          disabled={isSubmitting || !formData.name || !formData.phone}
+          disabled={isSubmitting || !formData.name || !isPhoneValid || !isChecked}
         >
           {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
         </button>
-        <p className={styles.privacy}>
-          Нажимая на кнопку, вы соглашаетесь с <button onClick={() => setIsPrivacyModalOpen(true)}>Политикой конфиденциальности</button>
-        </p>
+        <div className={styles.verify}>
+          <input type='checkbox' checked={isChecked} onChange={(e) => setIsChecked(e.target.checked)} />
+          <p className={styles.privacy}>
+            Нажимая на кнопку, вы соглашаетесь с <button onClick={() => setIsPrivacyModalOpen(true)}>Политикой конфиденциальности</button>
+          </p>
+        </div>
       </div>
     </div>
     <div>

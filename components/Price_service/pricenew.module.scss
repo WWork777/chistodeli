@@ -370,8 +370,17 @@
   &:hover {
     background: #059669;
   }
+  &:disabled {
+    background: #0596683b;
+    cursor:not-allowed;
+  }
 }
+.verify {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
 
+}
 .privacy {
   font-size: 12px;
   color: #6b7280;

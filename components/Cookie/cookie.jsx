@@ -19,6 +19,11 @@ export default function CookieConsent() {
     setIsVisible(false);
   };
 
+  const rejectCookies = () => {
+    localStorage.setItem('cookieConsent', 'rejected');
+    setIsVisible(false);
+  };
+
   const openPolicy = () => {
     setIsPolicyOpen(true);
   };
@@ -43,12 +48,20 @@ export default function CookieConsent() {
             </p>
           </div>
           
-          <button 
-            className="cookie-consent__button"
-            onClick={acceptCookies}
-          >
-            Принять
-          </button>
+          <div className="cookie-consent__buttons">
+            <button 
+              className="cookie-consent__button cookie-consent__button--reject"
+              onClick={rejectCookies}
+            >
+              Отклонить
+            </button>
+            <button 
+              className="cookie-consent__button cookie-consent__button--accept"
+              onClick={acceptCookies}
+            >
+              Принять
+            </button>
+          </div>
         </div>
       </div>
 

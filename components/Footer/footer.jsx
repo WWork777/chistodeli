@@ -1,5 +1,6 @@
 import Link from "next/link";
 import "./footer.scss";
+import PrivacyPolicyModal from "../Price_service/political_confidencial";
 export function Footer() {
     return (
         <>
@@ -56,6 +57,7 @@ export function Footer() {
                         <Link href={"mailto:info42@chistodely.ru"}>info42@chistodely.ru</Link>
                         <Link href={"tel:79045702735"}>+7 (905) 07-83-111</Link>
                         <Link href={"https://2gis.ru/kemerovo/firm/70000001081194421?m=86.102139%2C55.393166%2F16"}>ул. Тульская 28, офис 5, Кемерово,<br/>Кемеровская обл. 650002</Link>
+                        
                     </div>
                 </div>
             </div>
