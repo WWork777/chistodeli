@@ -4,6 +4,7 @@ import Image from "next/image";
 import "./users.scss";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { UrMore } from "./Ur_more";
 
 export function Users() {
   const searchParams = useSearchParams();
@@ -195,6 +196,7 @@ export function Users() {
           </div>
         </div>
       )}
+      <UrMore style={{display: activeService === 2 ? 'block' : 'none'}}/>
     </>
   );
 }
