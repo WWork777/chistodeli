@@ -2,7 +2,7 @@ footer {
     background: #161616;
     color: #fff;
     width: 100vw;
-    height: 360px;
+    height: 100%;
     padding: 33px 11vw 80px 11vw;
     font-family: "Montserrat";
     .footer-content {
@@ -39,6 +39,7 @@ footer {
             display: flex;
             flex-direction: column;
             text-align: right;
+            align-items: right;
             font-size: 22px;
             gap: 30px;
             a:first-child {
@@ -49,6 +50,9 @@ footer {
             }
             a:last-child {
                 font-weight: 400;
+            }
+            button {
+                color:#0091c9;
             }
         }
     }

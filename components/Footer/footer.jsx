@@ -1,7 +1,12 @@
+"use client";
+import { useState } from "react";
 import Link from "next/link";
 import "./footer.scss";
 import PrivacyPolicyModal from "../Price_service/political_confidencial";
+import ConsentModal from "../Price_service/consent_Modal";
 export function Footer() {
+    const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
+    const [isConsentModalOpen, setIsConsentModalOpen] = useState(false);
     return (
         <>
         <footer>
@@ -57,11 +62,20 @@ export function Footer() {
                         <Link href={"mailto:info42@chistodely.ru"}>info42@chistodely.ru</Link>
                         <Link href={"tel:79045702735"}>+7 (905) 07-83-111</Link>
                         <Link href={"https://2gis.ru/kemerovo/firm/70000001081194421?m=86.102139%2C55.393166%2F16"}>ул. Тульская 28, офис 5, Кемерово,<br/>Кемеровская обл. 650002</Link>
-                        
+                            <button onClick={() => setIsPrivacyModalOpen(true)}>Политика конфеденциальности</button>
+                            <button onClick={() => setIsConsentModalOpen(true)}>Обработка персональных даанных</button>
                     </div>
                 </div>
             </div>
         </footer>
+        <PrivacyPolicyModal 
+            isOpen={isPrivacyModalOpen}
+            onClose={() => setIsPrivacyModalOpen(false)}
+        />
+        <ConsentModal 
+            isOpen={isConsentModalOpen}
+            onClose={() => setIsConsentModalOpen(false)}
+        />
         </>
     )
 }
