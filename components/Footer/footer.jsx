@@ -119,7 +119,7 @@ export function Footer() {
                 Политика конфеденциальности
               </button>
               <button onClick={() => setIsConsentModalOpen(true)}>
-                Обработка персональных даанных
+                Обработка персональных данных
               </button>
             </div>
           </div>
