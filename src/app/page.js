@@ -1,9 +1,7 @@
-import Image from "next/image";
 import "./globals.scss";
 import { HeaderOffCanvas } from "../../components/Hero/headerOffCanvas";
 import { Hero } from "../../components/Hero/Hero/hero";
 import { Users } from "../../components/Services/Users/users";
-import Price from "../../components/Price_service/price";
 import { Footer } from "../../components/Footer/footer";
 import { Promoutions } from "../../components/Promoutions/promoutions";
 import { YandexMap } from "../../components/Yandex_map/yandexMap";
