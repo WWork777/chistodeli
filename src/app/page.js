@@ -1,7 +1,9 @@
+import Image from "next/image";
 import "./globals.scss";
 import { HeaderOffCanvas } from "../../components/Hero/headerOffCanvas";
 import { Hero } from "../../components/Hero/Hero/hero";
 import { Users } from "../../components/Services/Users/users";
+import Price from "../../components/Price_service/price";
 import { Footer } from "../../components/Footer/footer";
 import { Promoutions } from "../../components/Promoutions/promoutions";
 import { YandexMap } from "../../components/Yandex_map/yandexMap";
@@ -10,6 +12,7 @@ import { Questions } from "../../components/Questions/questions";
 import { Clients } from "../../components/Clients/clients";
 import { ExampleWorks } from "../../components/Examples_works/examples_works";
 import CleaningCalculator from "../../components/Price_service/pricenew";
+import { Suspense } from "react";
 
 export async function generateMetadata() {
   return {
@@ -82,7 +85,10 @@ export default function Home() {
     <>
       <HeaderOffCanvas />
       <Hero />
-      <Users />
+      <Suspense fallback={<div>Загрузка...</div>}>
+        <Users />
+      </Suspense>
+
       {/* <Price /> */}
       <CleaningCalculator />
       <ExampleWorks />
