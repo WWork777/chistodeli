@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import background from "../../../public/background_hero.webp";
 import woman from "../../../public/hero_woman_item.webp";
