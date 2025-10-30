@@ -210,10 +210,10 @@
       padding: 0 17px;
       justify-content: start;
       .woman-img {
-        height: 600px;
-        width: 494px;
-        left: 34vw !important;
-        top: 20vh;
+        height: 720px;
+        width: 420px;
+        left: 36vw !important;
+        bottom: 0;
       }
       .hero-slogan {
         gap: 10px;
@@ -273,6 +273,11 @@
 @media (max-width: 400px) {
   .hero {
     .hero-content {
+      .woman-img {
+        height: 500px;
+        width: 320px;
+        left: 45vw !important;
+      }
       .hero-slogan {
         margin-top: 110px;
       }

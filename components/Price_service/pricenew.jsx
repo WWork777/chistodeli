@@ -44,7 +44,7 @@ export default function CleaningCalculator() {
     { 
       id: 3, 
       name: 'Уборка балкона с мытьем окон', 
-      price: '2500P', 
+      price: 'от 2500P', 
       type: 'button',
       value: 'Уборка балкона с мытьем окон',
       priceValue: 2500,
@@ -62,10 +62,10 @@ export default function CleaningCalculator() {
     { 
       id: 5, 
       name: 'Мытьё вытяжки', 
-      price: '500P', 
+      price: '700P', 
       type: 'button',
       value: 'Мытьё вытяжки',
-      priceValue: 500,
+      priceValue: 700,
       calculationType: 'fixed'
     },
     { 

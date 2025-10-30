@@ -51,14 +51,6 @@ export function OffCanvas({ isOpen, onClose }) {
                         </svg>
                         <Link href={"tel:79050783111"}>+7 (905) 078-31-11</Link>
                     </div>
-                    <div className="city">
-                        <select name="options" id="exampleSelect">  
-                            <option value="volvo">Кемерово</option>  
-                            <option value="saab">Кемерово</option>  
-                            <option value="fiat">Кемерово</option>  
-                            <option value="audi">Кемерово</option>  
-                        </select>
-                    </div>
                     <div className="icons">
                         <Link className="icon" href={"https://t.me/TanushaSmir"}>
                             <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
