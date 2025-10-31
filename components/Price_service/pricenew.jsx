@@ -124,7 +124,7 @@ export default function CleaningCalculator() {
     },
     { 
       id: 12, 
-      name: 'Химчистка мягкой мебели, ковров', 
+      name: 'Химчистка мягкой мебели', 
       price: '2500P шт.', 
       type: 'counter',
       value: 'Химчистка мягкой мебели, ковров',
