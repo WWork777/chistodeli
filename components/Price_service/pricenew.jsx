@@ -132,15 +132,6 @@ export default function CleaningCalculator() {
       calculationType: 'perUnit'
     },
     { 
-      id: 13, 
-      name: 'Снять/повесить шторы, тюль', 
-      price: '200P шт.', 
-      type: 'counter',
-      value: 'Снять/повесить шторы, тюль',
-      priceValue: 200,
-      calculationType: 'perUnit'
-    },
-    { 
       id: 14, 
       name: 'Озонирование', 
       price: '2500P', 
