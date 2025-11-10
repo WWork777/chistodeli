@@ -72,7 +72,7 @@ export default function Price() {
           label: "Уборка балкона с мытьем окон", 
           price: 2500, 
           calculationType: "fixed",
-          displayPrice: "2500₽"
+          displayPrice: "от 2500₽"
         },
         { 
           value: "Мытьё кухонных ящиков", 
