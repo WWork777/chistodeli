@@ -89,8 +89,8 @@ export default function Home() {
         <Users />
       </Suspense>
 
-      {/* <Price /> */}
-      <CleaningCalculator />
+      <Price />
+      {/* <CleaningCalculator /> */}
       <ExampleWorks />
       <Promoutions />
       <Reviews />
