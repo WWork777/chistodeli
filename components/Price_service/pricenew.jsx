@@ -235,37 +235,44 @@ export default function CleaningCalculator() {
     return formData.additionalservices.includes(serviceValue);
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
+const handleInputChange = (e) => {
+  const { name, value } = e.target;
+  
+  if (name === 'phone') {
+    // Запрещаем удаление +7
+    if (!value.startsWith('+7')) {
+      // Если пользователь пытается стереть +7, восстанавливаем
+      setFormData(prev => ({
+        ...prev,
+        phone: '+7'
+      }));
+      setIsPhoneValid(false);
+      return;
+    }
     
-    if (name === 'phone') {
-      let cleanedValue = value;
-      if (value.startsWith('+')) {
-        cleanedValue = '+' + value.slice(1).replace(/\D/g, '');
-      } else {
-        cleanedValue = value.replace(/\D/g, '');
-      }
-      
+    let cleanedValue = value;
+    if (value.startsWith('+7')) {
+      // Оставляем +7 и добавляем только цифры после
+      cleanedValue = '+7' + value.slice(2).replace(/\D/g, '');
+    }
+    
+    // Ограничиваем длину (11 цифр + символ +)
+    if (cleanedValue.length <= 12) { // +7 + 10 цифр = 12 символов
       setFormData(prev => ({
         ...prev,
         [name]: cleanedValue
       }));
 
-      let phoneDigits = cleanedValue;
-      if (cleanedValue.startsWith('+')) {
-        phoneDigits = cleanedValue.slice(1).replace(/\D/g, '');
-      } else {
-        phoneDigits = cleanedValue.replace(/\D/g, '');
-      }
-      
+      const phoneDigits = cleanedValue.slice(1).replace(/\D/g, '');
       setIsPhoneValid(phoneDigits.length === 11);
-    } else {
-      setFormData(prev => ({
-        ...prev,
-        [name]: value
-      }));
     }
-  };
+  } else {
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  }
+};
 
   const handlePaste = (e) => {
     if (e.target.name === 'phone') {
@@ -583,6 +590,9 @@ export default function CleaningCalculator() {
 
       {/* Кнопка заказа */}
       <div className={styles.orderSection}>
+        <p style={{color: "red", transform: "translateY(-12px)"}}>
+          {!formData.name || !isPhoneValid ? "Заполните все поля" : ""}
+        </p>
         <button 
           onClick={handleSubmit} 
           className={styles.orderButton}
