@@ -2,6 +2,7 @@
 import { useState } from "react";
 import styles from "./quiz.module.scss";
 import PrivacyPolicyModal from './political_confidencial';
+import Link from "next/link";
 
 export default function Price() {
   const [step, setStep] = useState(0);
@@ -543,9 +544,11 @@ export default function Price() {
 
         <div className={styles.navigation}>
           <button type="button" onClick={handleBack} className={styles.backButton}>Назад</button>
-          <button type="submit" className={styles.submitButton} disabled={isSubmitting || !formData.name || !isPhoneValid || !isChecked}>
-            {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
-          </button>
+            <button type="submit" className={styles.submitButton} disabled={isSubmitting || !formData.name || !isPhoneValid || !isChecked}>
+              <Link href={"#calculate"}>
+              {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
+              </Link>
+            </button>
         </div>
       </div>
     </form>
