@@ -545,9 +545,7 @@ export default function Price() {
         <div className={styles.navigation}>
           <button type="button" onClick={handleBack} className={styles.backButton}>Назад</button>
             <button type="submit" className={styles.submitButton} disabled={isSubmitting || !formData.name || !isPhoneValid || !isChecked}>
-              <Link href={"#calculate"}>
               {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
-              </Link>
             </button>
         </div>
       </div>
