@@ -108,7 +108,7 @@ export function YandexMap() {
                   </svg>
                 </div>
               </Link>
-              <Link href={"https://t.me/TanushaSmir"}>
+              <Link href={"https://t.me/chistodely42"}>
                 <div className="map-contact-message">
                   <span>Telegram</span>
                   <svg
