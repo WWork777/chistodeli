@@ -77,7 +77,7 @@ export function Footer() {
                   />
                 </svg>
               </Link>
-              <Link href={"https://t.me/TanushaSmir"}>
+              <Link href={"https://t.me/chistodely42"}>
                 <svg
                   width="45"
                   height="45"

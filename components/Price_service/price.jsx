@@ -2,6 +2,7 @@
 import { useState } from "react";
 import styles from "./quiz.module.scss";
 import PrivacyPolicyModal from "./political_confidencial";
+import Link from "next/link";
 
 export default function Price() {
   const [step, setStep] = useState(0);
@@ -72,7 +73,7 @@ export default function Price() {
           label: "Уборка балкона с мытьем окон",
           price: 2500,
           calculationType: "fixed",
-          displayPrice: "2500₽",
+          displayPrice: "от 2500₽",
         },
         {
           value: "Мытьё кухонных ящиков",
