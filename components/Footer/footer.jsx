@@ -115,6 +115,9 @@ export function Footer() {
                 <br />
                 Кемеровская обл. 650002
               </Link>
+              <div>ИП Смирнов Андрей Леонидович</div>
+              <div>ИНН: 420510759590</div>
+              <div>ОГРНИП: 322420500078648</div>
               <button onClick={() => setIsPrivacyModalOpen(true)}>
                 Политика конфеденциальности
               </button>
