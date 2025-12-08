@@ -32,8 +32,9 @@
 }
 body {
   width: 100vw;
-  background: #FFF;
+  background: #fff;
   overflow-x: hidden !important;
+  scroll-behavior: smooth;
 }
 button {
   &:hover {
@@ -41,5 +42,4 @@ button {
   }
 }
 html {
-  
 }

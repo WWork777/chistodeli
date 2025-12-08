@@ -83,7 +83,6 @@ export async function generateMetadata() {
 export default function Home() {
   return (
     <>
-      <HeaderOffCanvas />
       <Hero />
       <Suspense fallback={<div>Загрузка...</div>}>
         <Users />
@@ -97,7 +96,6 @@ export default function Home() {
       <Clients />
       <Questions />
       <YandexMap />
-      <Footer />
     </>
   );
 }
