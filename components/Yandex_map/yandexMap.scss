@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   padding: 50px 12vw 50px 12vw;
-    .map {
+  .map {
     width: 100%;
     height: 477px;
     border-radius: 30px;
@@ -19,10 +19,10 @@
     padding: 20px 0 35px 32px;
     margin: 30px 0 30px 30px;
     box-shadow: inset 0 0 50px #fff;
-    box-shadow: 0 4 30px rgba(#000000, .1);
+    box-shadow: 0 4 30px rgba(#000000, 0.1);
     backdrop-filter: blur(20px);
     h2 {
-      font-family: "Montserrat";
+      font-family: 'Montserrat';
       font-size: 50px;
       font-weight: 600;
     }
@@ -32,12 +32,12 @@
         flex-direction: column;
         h4 {
           margin-top: 5px;
-          font-family: "Montserrat";
+          font-family: 'Montserrat';
           font-size: 24px;
           font-weight: 500;
         }
         span {
-          font-family: "Montserrat";
+          font-family: 'Montserrat';
           font-size: 18px;
           font-weight: 400;
         }
@@ -46,39 +46,39 @@
         margin-top: 25px;
         display: flex;
         flex-direction: column;
-          h4 {
-            font-family: "Montserrat";
-            font-size: 24px;
-            font-weight: 500;
-            margin-bottom: 5px;
-          }
-          > span {
-            font-family: "Montserrat";
-            font-size: 18px;
-            font-weight: 400;
-          }
-          > span:nth-child(3) {
-            font-weight: 500;
-          }
-          .map-contacts-messages {
+        h4 {
+          font-family: 'Montserrat';
+          font-size: 24px;
+          font-weight: 500;
+          margin-bottom: 5px;
+        }
+        > span {
+          font-family: 'Montserrat';
+          font-size: 18px;
+          font-weight: 400;
+        }
+        > span:nth-child(3) {
+          font-weight: 500;
+        }
+        .map-contacts-messages {
+          display: flex;
+          gap: 15px;
+          margin-top: 30px;
+          .map-contact-message {
             display: flex;
-            gap: 15px;
-            margin-top: 30px;
-            .map-contact-message {
-              display: flex;
-              gap: 10px;
-              border-radius: 100px;
-              border: 1px solid #000;
-              justify-content: center;
-              align-items: center;
-              padding: 6px 5px 6px 20px;
-              span {
-                font-family: "Montserrat";
-                font-weight: 400;
-              }
+            gap: 10px;
+            border-radius: 100px;
+            border: 1px solid #000;
+            justify-content: center;
+            align-items: center;
+            padding: 6px 5px 6px 20px;
+            span {
+              font-family: 'Montserrat';
+              font-weight: 400;
             }
           }
         }
+      }
     }
   }
 }
@@ -90,7 +90,7 @@
   }
 }
 @media (max-width: 1100px) {
-    .map-container {
+  .map-container {
     .map-contacts {
       display: none;
     }
@@ -103,9 +103,9 @@
 }
 @media (max-width: 768px) {
   .map-container {
-      .map {
-        height: 300px;
-        border-radius: 8px;
-  }
+    .map {
+      height: 300px;
+      border-radius: 8px;
+    }
   }
 }
