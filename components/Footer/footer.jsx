@@ -106,7 +106,7 @@ export function Footer() {
               <Link href={"mailto:info42@chistodely.ru"}>
                 info42@chistodely.ru
               </Link>
-              <Link href={"tel:+79045702735"}>+7 (905) 07-83-111</Link>
+              <Link href={"tel:+79050783111"}>+7 (905) 07-83-111</Link>
               <Link
                 href={
                   "https://2gis.ru/kemerovo/firm/70000001081194421?m=86.102139%2C55.393166%2F16"
