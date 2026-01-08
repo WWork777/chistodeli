@@ -1,28 +1,28 @@
 // components/NewYearModal/NewYearModal.jsx
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import styles from './NewYearModal.module.scss';
-import { X } from 'lucide-react';
+import { useEffect, useState } from "react";
+import styles from "./NewYearModal.module.scss";
+import { X } from "lucide-react";
 
 const NewYearModal = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    agreement: false
+    name: "",
+    phone: "",
+    agreement: false,
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {
-    const hasSeenModal = sessionStorage.getItem('hasSeenNewYearModal');
-    
+    const hasSeenModal = sessionStorage.getItem("hasSeenNewYearModal");
+
     const timer = setTimeout(() => {
       if (!hasSeenModal) {
         setIsVisible(true);
-        sessionStorage.setItem('hasSeenNewYearModal', 'true');
+        sessionStorage.setItem("hasSeenNewYearModal", "true");
       }
     }, 1500);
 
@@ -30,27 +30,27 @@ const NewYearModal = () => {
   }, []);
 
   const validatePhone = (phone) => {
-    const cleanPhone = phone.replace(/[^\d+]/g, '');
+    const cleanPhone = phone.replace(/[^\d+]/g, "");
     return cleanPhone.length >= 11;
   };
 
   const validateForm = () => {
     const newErrors = {};
-    
+
     if (!formData.name.trim()) {
-      newErrors.name = 'Введите ваше имя';
+      newErrors.name = "Введите ваше имя";
     }
-    
+
     if (!formData.phone.trim()) {
-      newErrors.phone = 'Введите номер телефона';
+      newErrors.phone = "Введите номер телефона";
     } else if (!validatePhone(formData.phone)) {
-      newErrors.phone = 'Введите корректный номер телефона';
+      newErrors.phone = "Введите корректный номер телефона";
     }
-    
+
     if (!formData.agreement) {
-      newErrors.agreement = 'Необходимо согласие';
+      newErrors.agreement = "Необходимо согласие";
     }
-    
+
     return newErrors;
   };
 
@@ -60,66 +60,66 @@ const NewYearModal = () => {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    
-    if (name === 'phone') {
-      let numbers = value.replace(/[^\d]/g, '');
+
+    if (name === "phone") {
+      let numbers = value.replace(/[^\d]/g, "");
       if (numbers.length > 0) {
-        if (!numbers.startsWith('7') && !numbers.startsWith('8')) {
-          numbers = '7' + numbers;
+        if (!numbers.startsWith("7") && !numbers.startsWith("8")) {
+          numbers = "7" + numbers;
         }
         numbers = numbers.substring(0, 11);
-        
-        let formatted = '+7';
-        if (numbers.length > 1) formatted += ' (' + numbers.substring(1, 4);
-        if (numbers.length > 4) formatted += ') ' + numbers.substring(4, 7);
-        if (numbers.length > 7) formatted += '-' + numbers.substring(7, 9);
-        if (numbers.length > 9) formatted += '-' + numbers.substring(9, 11);
-        
-        setFormData(prev => ({ ...prev, [name]: formatted }));
+
+        let formatted = "+7";
+        if (numbers.length > 1) formatted += " (" + numbers.substring(1, 4);
+        if (numbers.length > 4) formatted += ") " + numbers.substring(4, 7);
+        if (numbers.length > 7) formatted += "-" + numbers.substring(7, 9);
+        if (numbers.length > 9) formatted += "-" + numbers.substring(9, 11);
+
+        setFormData((prev) => ({ ...prev, [name]: formatted }));
       } else {
-        setFormData(prev => ({ ...prev, [name]: '' }));
+        setFormData((prev) => ({ ...prev, [name]: "" }));
       }
     } else {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        [name]: type === 'checkbox' ? checked : value
+        [name]: type === "checkbox" ? checked : value,
       }));
     }
-    
+
     if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: null }));
+      setErrors((prev) => ({ ...prev, [name]: null }));
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const formErrors = validateForm();
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
       return;
     }
-    
+
     try {
       setIsSubmitting(true);
       setErrors({});
-      
-      const response = await fetch('/api/submit-application', {
-        method: 'POST',
+
+      const response = await fetch("/api/submit-application", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           name: formData.name.trim(),
           phone: formData.phone,
-          source: 'newyear_modal'
+          source: "newyear_modal",
         }),
       });
 
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result.message || 'Ошибка отправки');
+        throw new Error(result.message || "Ошибка отправки");
       }
 
       if (result.success) {
@@ -128,13 +128,12 @@ const NewYearModal = () => {
           handleClose();
         }, 2000);
       } else {
-        throw new Error('Не удалось отправить заявку');
+        throw new Error("Не удалось отправить заявку");
       }
-      
     } catch (error) {
-      console.error('Ошибка:', error);
-      setErrors({ 
-        submit: 'Ошибка отправки. Позвоните нам: +7 (905) 078-31-11' 
+      console.error("Ошибка:", error);
+      setErrors({
+        submit: "Ошибка отправки. Позвоните нам: +7 (905) 078-31-11",
       });
     } finally {
       setIsSubmitting(false);
@@ -149,12 +148,12 @@ const NewYearModal = () => {
 
   useEffect(() => {
     if (isVisible) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     };
   }, [isVisible]);
 
@@ -171,16 +170,16 @@ const NewYearModal = () => {
           ))}
         </div>
       </div>
-      
+
       <div className={styles.modalContent}>
-        <button 
-          className={styles.closeButton} 
+        <button
+          className={styles.closeButton}
           onClick={handleClose}
           disabled={isSubmitting}
         >
           <X size={20} />
         </button>
-        
+
         {success ? (
           <div className={styles.successMessage}>
             <div className={styles.successIcon}>✅</div>
@@ -201,7 +200,7 @@ const NewYearModal = () => {
 
             <div className={styles.modalBody}>
               <p className={styles.offerText}>
-                Закажите генеральную уборку до 31 декабря
+                Закажите генеральную уборку до 31 января
               </p>
 
               <form onSubmit={handleSubmit} className={styles.form}>
@@ -213,7 +212,7 @@ const NewYearModal = () => {
                     value={formData.name}
                     onChange={handleChange}
                     disabled={isSubmitting}
-                    className={errors.name ? styles.inputError : ''}
+                    className={errors.name ? styles.inputError : ""}
                   />
                   {errors.name && (
                     <div className={styles.errorMessage}>{errors.name}</div>
@@ -228,7 +227,7 @@ const NewYearModal = () => {
                     value={formData.phone}
                     onChange={handleChange}
                     disabled={isSubmitting}
-                    className={errors.phone ? styles.inputError : ''}
+                    className={errors.phone ? styles.inputError : ""}
                   />
                   {errors.phone && (
                     <div className={styles.errorMessage}>{errors.phone}</div>
@@ -243,13 +242,15 @@ const NewYearModal = () => {
                     checked={formData.agreement}
                     onChange={handleChange}
                     disabled={isSubmitting}
-                    className={errors.agreement ? styles.checkboxError : ''}
+                    className={errors.agreement ? styles.checkboxError : ""}
                   />
                   <label htmlFor="agreement">
                     Согласен на обработку данных
                   </label>
                   {errors.agreement && (
-                    <div className={styles.errorMessage}>{errors.agreement}</div>
+                    <div className={styles.errorMessage}>
+                      {errors.agreement}
+                    </div>
                   )}
                 </div>
 
@@ -257,8 +258,8 @@ const NewYearModal = () => {
                   <div className={styles.submitError}>{errors.submit}</div>
                 )}
 
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   className={styles.submitButton}
                   disabled={isSubmitting}
                 >
@@ -268,7 +269,7 @@ const NewYearModal = () => {
                       Отправляем...
                     </span>
                   ) : (
-                    'ПОЛУЧИТЬ ПОДАРОК'
+                    "ПОЛУЧИТЬ ПОДАРОК"
                   )}
                 </button>
               </form>
