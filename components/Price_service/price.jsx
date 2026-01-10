@@ -1,165 +1,165 @@
-"use client";
-import { useState } from "react";
-import styles from "./quiz.module.scss";
-import PrivacyPolicyModal from "./political_confidencial";
-import Link from "next/link";
+'use client';
+import { useState } from 'react';
+import styles from './quiz.module.scss';
+import PrivacyPolicyModal from './political_confidencial';
+import ConsentModal from './consent_Modal';
 
 export default function Price() {
-  const [step, setStep] = useState(0);
   const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [isConsentModalOpen, setIsConsentModalOpen] = useState(false);
+  const [showAllServices, setShowAllServices] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [isPhoneValid, setIsPhoneValid] = useState(false);
 
   const [formData, setFormData] = useState({
-    user: "Физическое лицо",
-    service: "Генеральная уборка",
-    rooms: "1",
+    user: 'Физическое лицо',
+    service: 'Генеральная уборка',
+    rooms: '1',
     square: 50,
-    name: "",
-    phone: "+7",
-    comment: "",
+    name: '',
+    phone: '+7',
+    cleaningDate: '',
+    comment: '',
     additionalservices: [],
   });
 
   const questions = [
     {
-      title: "Какая уборка вам нужна?",
-      type: "radio",
-      name: "service",
+      title: 'Какая уборка вам нужна?',
+      type: 'radio',
+      name: 'service',
       options: [
-        { value: "Генеральная уборка", label: "Генеральная уборка" },
-        { value: "Уборка после ремонта", label: "Уборка после ремонта" },
+        { value: 'Генеральная уборка', label: 'Генеральная уборка' },
+        { value: 'Уборка после ремонта', label: 'Уборка после ремонта' },
       ],
     },
     {
-      title: "Какое количество комнат нужно убрать?",
-      type: "select",
-      name: "rooms",
+      title: 'Какое количество комнат нужно убрать?',
+      type: 'select',
+      name: 'rooms',
       options: [
-        { value: "1", label: "1 комната" },
-        { value: "2", label: "2 комнаты" },
-        { value: "3", label: "3 комнаты" },
-        { value: "4", label: "4 комнаты" },
+        { value: '1', label: '1 комната' },
+        { value: '2', label: '2 комнаты' },
+        { value: '3', label: '3 комнаты' },
+        { value: '4', label: '4 комнаты' },
       ],
     },
     {
-      title: "Какая площадь вашего помещения?",
-      type: "square",
-      name: "square",
+      title: 'Какая площадь вашего помещения?',
+      type: 'square',
+      name: 'square',
     },
     {
-      title: "Дополнительные услуги",
-      type: "checkbox",
-      name: "additionalservices",
+      title: 'Дополнительные услуги',
+      type: 'checkbox',
+      name: 'additionalservices',
       options: [
         {
-          value: "Мытьё окон",
-          label: "Мытьё окон",
+          value: 'Мытьё окон',
+          label: 'Мытьё окон',
           price: 700,
-          calculationType: "perUnit",
-          displayPrice: "700₽ шт.",
+          calculationType: 'perUnit',
+          displayPrice: '700₽ шт.',
         },
         {
-          value: "Удаление пыли с оконных рам",
-          label: "Удаление пыли с оконных рам",
+          value: 'Удаление пыли с оконных рам',
+          label: 'Удаление пыли с оконных рам',
           price: 20,
-          calculationType: "percentage",
-          displayPrice: "+20%",
+          calculationType: 'percentage',
+          displayPrice: '+20%',
         },
         {
-          value: "Уборка балкона с мытьем окон",
-          label: "Уборка балкона с мытьем окон",
+          value: 'Уборка балкона с мытьем окон',
+          label: 'Уборка балкона с мытьем окон',
           price: 2500,
-          calculationType: "fixed",
-          displayPrice: "от 2500₽",
+          calculationType: 'fixed',
+          displayPrice: 'от 2500₽',
         },
         {
-          value: "Мытьё кухонных ящиков",
-          label: "Мытьё кухонных ящиков",
+          value: 'Мытьё кухонных ящиков',
+          label: 'Мытьё кухонных ящиков',
           price: 1000,
-          calculationType: "fixed",
-          displayPrice: "1000₽",
+          calculationType: 'fixed',
+          displayPrice: '1000₽',
         },
         {
-          value: "Мытьё вытяжки",
-          label: "Мытьё вытяжки",
+          value: 'Мытьё вытяжки',
+          label: 'Мытьё вытяжки',
           price: 700,
-          calculationType: "fixed",
-          displayPrice: "700₽",
+          calculationType: 'fixed',
+          displayPrice: '700₽',
         },
         {
-          value: "Мытье посудомоечной машины",
-          label: "Мытье посудомоечной машины",
+          value: 'Мытье посудомоечной машины',
+          label: 'Мытье посудомоечной машины',
           price: 500,
-          calculationType: "fixed",
-          displayPrice: "500₽",
+          calculationType: 'fixed',
+          displayPrice: '500₽',
         },
         {
-          value: "Мытьё холодильника внутри",
-          label: "Мытьё холодильника внутри",
+          value: 'Мытьё холодильника внутри',
+          label: 'Мытьё холодильника внутри',
           price: 1000,
-          calculationType: "perUnit",
-          displayPrice: "1000₽ шт.",
+          calculationType: 'perUnit',
+          displayPrice: '1000₽ шт.',
         },
         {
-          value: "Мытье духового шкафа",
-          label: "Мытье духового шкафа",
+          value: 'Мытье духового шкафа',
+          label: 'Мытье духового шкафа',
           price: 1000,
-          calculationType: "fixed",
-          displayPrice: "1000₽",
+          calculationType: 'fixed',
+          displayPrice: '1000₽',
         },
         {
-          value: "Мытьё микроволновой печи",
-          label: "Мытьё микроволновой печи",
+          value: 'Мытьё микроволновой печи',
+          label: 'Мытьё микроволновой печи',
           price: 500,
-          calculationType: "fixed",
-          displayPrice: "500₽",
+          calculationType: 'fixed',
+          displayPrice: '500₽',
         },
         {
-          value: "Мытьё посуды",
-          label: "Мытьё посуды",
+          value: 'Мытьё посуды',
+          label: 'Мытьё посуды',
           price: 500,
-          calculationType: "fixed",
-          displayPrice: "500₽",
+          calculationType: 'fixed',
+          displayPrice: '500₽',
         },
         {
-          value: "Удаление шерсти дом. животных",
-          label: "Удаление шерсти дом. животных",
+          value: 'Удаление шерсти дом. животных',
+          label: 'Удаление шерсти дом. животных',
           price: 2000,
-          calculationType: "fixed",
-          displayPrice: "2000₽",
+          calculationType: 'fixed',
+          displayPrice: '2000₽',
         },
         {
-          value: "Химчистка мягкой мебели, ковров",
-          label: "Химчистка мягкой мебели, ковров",
+          value: 'Химчистка мягкой мебели, ковров',
+          label: 'Химчистка мягкой мебели, ковров',
           price: 2500,
-          calculationType: "perUnit",
-          displayPrice: "2500₽ шт.",
+          calculationType: 'perUnit',
+          displayPrice: '2500₽ шт.',
         },
         {
-          value: "Озонирование",
-          label: "Озонирование",
+          value: 'Озонирование',
+          label: 'Озонирование',
           price: 2500,
-          calculationType: "fixed",
-          displayPrice: "2500₽",
+          calculationType: 'fixed',
+          displayPrice: '2500₽',
         },
       ],
     },
   ];
 
-  const userQuestion = [
-    {
-      title: "Вы являетесь физическим или юридическим лицом?",
-      type: "radio",
-      name: "user",
-      options: [
-        { value: "Физическое лицо", label: "Физическое лицо" },
-        { value: "Юридическое лицо", label: "Юридическое лицо" },
-      ],
-    },
-  ];
+  const userQuestion = {
+    title: 'Вы являетесь физическим или юридическим лицом?',
+    type: 'radio',
+    name: 'user',
+    options: [
+      { value: 'Физическое лицо', label: 'Физическое лицо' },
+      { value: 'Юридическое лицо', label: 'Юридическое лицо' },
+    ],
+  };
 
   // Расчет стоимости
   const calculateBasePrice = () => {
@@ -182,9 +182,9 @@ export default function Price() {
       const count = serviceCounts[serviceValue];
 
       if (service?.price > 0) {
-        if (service.calculationType === "fixed") {
+        if (service.calculationType === 'fixed') {
           additionalPrice += service.price;
-        } else if (service.calculationType === "perUnit") {
+        } else if (service.calculationType === 'perUnit') {
           additionalPrice += service.price * count;
         }
       }
@@ -194,7 +194,7 @@ export default function Price() {
       const service = questions[3].options.find(
         (s) => s.value === serviceValue
       );
-      if (service?.calculationType === "percentage") {
+      if (service?.calculationType === 'percentage') {
         additionalPrice += basePrice * (service.price / 100);
       }
     });
@@ -204,27 +204,11 @@ export default function Price() {
 
   const totalPrice = calculateBasePrice() + calculateAdditionalPrice();
 
-  const handleNext = () => {
-    setIsAnimating(true);
-    setTimeout(() => {
-      setStep((prev) => prev + 1);
-      setIsAnimating(false);
-    }, 300);
-  };
-
-  const handleBack = () => {
-    setIsAnimating(true);
-    setTimeout(() => {
-      setStep((prev) => prev - 1);
-      setIsAnimating(false);
-    }, 300);
-  };
-
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
     setFormData((prev) => {
-      if (type === "checkbox") {
+      if (type === 'checkbox') {
         const currentArray = Array.isArray(prev[name]) ? prev[name] : [];
         const servicesQuestion = questions.find((q) => q.name === name);
         const option = servicesQuestion?.options.find(
@@ -233,7 +217,7 @@ export default function Price() {
 
         let newArray;
 
-        if (option?.calculationType === "perUnit") {
+        if (option?.calculationType === 'perUnit') {
           if (checked) {
             newArray = [...currentArray, value];
           } else {
@@ -255,7 +239,7 @@ export default function Price() {
 
         return { ...prev, [name]: newArray };
       } else {
-        return { ...prev, [name]: name === "square" ? +value : value };
+        return { ...prev, [name]: name === 'square' ? +value : value };
       }
     });
   };
@@ -263,18 +247,18 @@ export default function Price() {
   const handlePhoneChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === "phone") {
-      if (!value.startsWith("+7")) {
-        setFormData((prev) => ({ ...prev, phone: "+7" }));
+    if (name === 'phone') {
+      if (!value.startsWith('+7')) {
+        setFormData((prev) => ({ ...prev, phone: '+7' }));
         setIsPhoneValid(false);
         return;
       }
 
-      let cleanedValue = "+7" + value.slice(2).replace(/\D/g, "");
+      let cleanedValue = '+7' + value.slice(2).replace(/\D/g, '');
 
       if (cleanedValue.length <= 12) {
         setFormData((prev) => ({ ...prev, [name]: cleanedValue }));
-        const phoneDigits = cleanedValue.slice(1).replace(/\D/g, "");
+        const phoneDigits = cleanedValue.slice(1).replace(/\D/g, '');
         setIsPhoneValid(phoneDigits.length === 11);
       }
     } else {
@@ -283,16 +267,16 @@ export default function Price() {
   };
 
   const handlePaste = (e) => {
-    if (e.target.name === "phone") {
-      const pastedText = e.clipboardData.getData("text");
-      let cleanedValue = pastedText.startsWith("+")
-        ? "+" + pastedText.slice(1).replace(/\D/g, "")
-        : pastedText.replace(/\D/g, "");
+    if (e.target.name === 'phone') {
+      const pastedText = e.clipboardData.getData('text');
+      let cleanedValue = pastedText.startsWith('+')
+        ? '+' + pastedText.slice(1).replace(/\D/g, '')
+        : pastedText.replace(/\D/g, '');
 
       setFormData((prev) => ({ ...prev, phone: cleanedValue }));
-      let phoneDigits = cleanedValue.startsWith("+")
-        ? cleanedValue.slice(1).replace(/\D/g, "")
-        : cleanedValue.replace(/\D/g, "");
+      let phoneDigits = cleanedValue.startsWith('+')
+        ? cleanedValue.slice(1).replace(/\D/g, '')
+        : cleanedValue.replace(/\D/g, '');
 
       setIsPhoneValid(phoneDigits.length === 11);
       e.preventDefault();
@@ -302,25 +286,25 @@ export default function Price() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let phoneDigits = formData.phone.startsWith("+")
-      ? formData.phone.slice(1).replace(/\D/g, "")
-      : formData.phone.replace(/\D/g, "");
+    let phoneDigits = formData.phone.startsWith('+')
+      ? formData.phone.slice(1).replace(/\D/g, '')
+      : formData.phone.replace(/\D/g, '');
 
     if (phoneDigits.length !== 11) {
-      alert("Номер телефона должен содержать 11 цифр");
+      alert('Номер телефона должен содержать 11 цифр');
       return;
     }
 
     if (!isChecked) {
-      alert("Необходимо согласие с политикой конфиденциальности");
+      alert('Необходимо дать согласие на обработку персональных данных');
       return;
     }
 
     setIsSubmitting(true);
     try {
-      const response = await fetch("/api/sendCleaningOrder", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/sendCleaningOrder', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
           totalPrice: totalPrice,
@@ -330,21 +314,30 @@ export default function Price() {
         }),
       });
 
-      if (response.ok) {
-        if (typeof ym !== "undefined") {
-          ym(99528524, "reachGoal", "Quiz");
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        if (typeof ym !== 'undefined') {
+          ym(99528524, 'reachGoal', 'Quiz');
         }
-        setTimeout(() => {
-          setStep(7);
-          setIsAnimating(false);
-        }, 300);
+        setIsSubmitted(true);
       } else {
-        throw new Error("Ошибка при отправке");
+        // Показываем сообщение об ошибке из API или общее сообщение
+        const errorMessage =
+          data.message || `Ошибка при отправке (статус: ${response.status})`;
+        console.error('Ошибка при отправке заявки:', {
+          status: response.status,
+          data,
+        });
+        alert(
+          errorMessage ||
+            'Произошла ошибка при отправке заявки. Пожалуйста, попробуйте еще раз.'
+        );
       }
     } catch (error) {
-      console.error("Ошибка при отправке заявки:", error);
+      console.error('Ошибка при отправке заявки:', error);
       alert(
-        "Произошла ошибка при отправке заявки. Пожалуйста, попробуйте еще раз."
+        'Произошла ошибка при отправке заявки. Пожалуйста, попробуйте еще раз.'
       );
     } finally {
       setIsSubmitting(false);
@@ -360,451 +353,429 @@ export default function Price() {
     return formData.additionalservices.includes(serviceValue);
   };
 
-  const renderUser = () => {
-    if (step === 0) return null;
-    const userQuestions = userQuestion[step - 1];
-
-    return (
-      <div
-        className={`${styles.userQuestions} ${
-          isAnimating ? styles.fadeOut : styles.fadeIn
-        }`}
-      >
-        <h2>{userQuestions.title}</h2>
-        <div className={styles.options}>
-          {userQuestions.options.map((option, index) => (
-            <label
-              key={index}
-              className={`${styles.option} ${
-                formData[userQuestions.name] === option.value
-                  ? styles.active
-                  : ""
-              }`}
-            >
-              <input
-                type="radio"
-                name={userQuestions.name}
-                value={option.value}
-                checked={formData[userQuestions.name] === option.value}
-                onChange={handleChange}
-              />
-              {option.label}
-            </label>
-          ))}
-        </div>
-        <div className={styles.navigation}>
-          <button
-            onClick={handleBack}
-            className={styles.backButton}
-            disabled={step === 0}
-          >
-            Назад
-          </button>
-          <button
-            onClick={handleNext}
-            className={styles.nextButton}
-            disabled={step === 1 && !formData.user}
-          >
-            Далее
-          </button>
-        </div>
-      </div>
-    );
-  };
-
-  const renderQuestionLegally = () => {
-    if (step === 0) return null;
-    const question = questions[step - 2];
-    if (!question) return null;
-
-    return (
-      <div
-        className={`${styles.question} ${
-          isAnimating ? styles.fadeOut : styles.fadeIn
-        }`}
-      >
-        <div className={styles.progress}>
-          <div
-            className={styles.progressBar}
-            style={{ width: `${(step / (questions.length + 1)) * 100}%` }}
-          ></div>
-          <span className={styles.progressText}>
-            Шаг {step} из {questions.length + 1}
-          </span>
-        </div>
-
-        <h2 className={styles.questionTitle}>{question.title}</h2>
-
-        {question.type === "radio" && (
-          <div className={styles.options}>
-            {question.options.map((option, index) => (
-              <label
-                key={index}
-                className={`${styles.option} ${
-                  formData[question.name] === option.value ? styles.active : ""
-                }`}
-              >
-                <input
-                  type="radio"
-                  name={question.name}
-                  value={option.value}
-                  checked={formData[question.name] === option.value}
-                  onChange={handleChange}
-                />
-                {option.label}
-              </label>
-            ))}
-          </div>
-        )}
-
-        {question.type === "select" && (
-          <select
-            name={question.name}
-            value={formData[question.name]}
-            onChange={handleChange}
-            className={styles.selectInput}
-          >
-            {question.options.map((option, index) => (
-              <option key={index} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        )}
-
-        {question.type === "square" && (
-          <>
-            <div className={styles.rangeContainer}>
-              <input
-                type="range"
-                name={question.name}
-                min="1"
-                max="300"
-                value={formData.square}
-                onChange={handleChange}
-                className={styles.rangeInput}
-              />
-              <div className={styles.rangeValues}>
-                <span>1</span>
-                <span className={styles.selectedValue}>
-                  {formData.square} кв.м
-                </span>
-                <span>300</span>
-              </div>
-            </div>
-            <div className={styles.squarePreview}>
-              Базовая стоимость:{" "}
-              <span>{calculateBasePrice().toLocaleString()} ₽</span>
-            </div>
-          </>
-        )}
-
-        {question.type === "checkbox" && (
-          <div className={styles.servicesGrid}>
-            {question.options.map((option, index) => {
-              const count = getServiceCount(option.value);
-              const isSelected = isServiceSelected(option.value);
-
-              return (
-                <div
-                  key={index}
-                  className={`${styles.serviceCard} ${
-                    isSelected ? styles.serviceCardActive : ""
-                  }`}
-                >
-                  <div className={styles.serviceHeader}>
-                    <h3 className={styles.serviceName}>{option.label}</h3>
-                    <span className={styles.servicePrice}>
-                      {option.displayPrice}
-                    </span>
-                  </div>
-                  <div className={styles.serviceControls}>
-                    {option.calculationType === "perUnit" ? (
-                      <div className={styles.counter}>
-                        <button
-                          onClick={() =>
-                            handleChange({
-                              target: {
-                                name: question.name,
-                                value: option.value,
-                                type: "checkbox",
-                                checked: false,
-                              },
-                            })
-                          }
-                          disabled={count === 0}
-                          className={styles.counterBtn}
-                        >
-                          -
-                        </button>
-                        <span className={styles.counterValue}>{count}</span>
-                        <button
-                          onClick={() =>
-                            handleChange({
-                              target: {
-                                name: question.name,
-                                value: option.value,
-                                type: "checkbox",
-                                checked: true,
-                              },
-                            })
-                          }
-                          className={styles.counterBtn}
-                        >
-                          +
-                        </button>
-                      </div>
-                    ) : (
-                      <button
-                        onClick={() =>
-                          handleChange({
-                            target: {
-                              name: question.name,
-                              value: option.value,
-                              type: "checkbox",
-                              checked: !isSelected,
-                            },
-                          })
-                        }
-                        className={`${styles.serviceBtn} ${
-                          isSelected ? styles.serviceBtnActive : ""
-                        }`}
-                      >
-                        {isSelected ? "Добавлено" : "Добавить"}
-                      </button>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        )}
-
-        <div className={styles.navigation}>
-          <button
-            onClick={handleBack}
-            className={styles.backButton}
-            disabled={step === 0}
-          >
-            Назад
-          </button>
-          <button
-            onClick={handleNext}
-            className={styles.nextButton}
-            disabled={
-              (step === 2 && !formData.service) ||
-              (step === 3 && !formData.rooms) ||
-              (step === 4 && !formData.square)
-            }
-          >
-            {step === questions.length + 1 ? "Продолжить" : "Далее"}
-          </button>
-        </div>
-      </div>
-    );
-  };
-
-  const renderFinalForm = () => (
-    <form
-      onSubmit={handleSubmit}
-      className={`${styles.finalForm} ${
-        isAnimating ? styles.fadeOut : styles.fadeIn
-      }`}
-    >
-      <h2 className={styles.formTitle}>Заполните контактные данные</h2>
-      <p className={styles.formDescription}>
-        Мы свяжемся с вами в ближайшее время
-      </p>
-
-      <div className={styles.formGrid}>
-        <div className={styles.inputGroup}>
-          <label>Ваше имя</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            placeholder="Как к вам обращаться?"
-            required
-            className={styles.formInput}
-          />
-        </div>
-
-        <div className={styles.inputGroup}>
-          <label>Телефон</label>
-          <input
-            type="tel"
-            name="phone"
-            value={formData.phone}
-            onChange={handlePhoneChange}
-            onPaste={handlePaste}
-            placeholder="+7 (000) 000-00-00"
-            required
-            className={styles.formInput}
-          />
-        </div>
-
-        <div className={styles.inputGroup}>
-          <label>Комментарий</label>
-          <textarea
-            name="comment"
-            value={formData.comment}
-            onChange={handleChange}
-            placeholder="Например, желаемая дата уборки"
-            rows={3}
-            className={styles.formTextarea}
-          />
-        </div>
-      </div>
-
-      <div className={styles.orderSummary}>
-        <h3 className={styles.summaryTitle}>Сводка заказа</h3>
-        <div className={styles.summaryItem}>
-          <span>{formData.service}</span>
-          <span>{formData.rooms} ком. квартира</span>
-          <span>
-            {formData.square} кв. м — {calculateBasePrice().toLocaleString()} ₽
-          </span>
-        </div>
-
-        {formData.additionalservices.length > 0 && (
-          <div className={styles.additionalServices}>
-            <h4>Дополнительные услуги:</h4>
-            {questions[3].options
-              .filter((service) => getServiceCount(service.value) > 0)
-              .map((service) => {
-                const count = getServiceCount(service.value);
-                let servicePrice = 0;
-
-                if (service.calculationType === "fixed") {
-                  servicePrice = service.price;
-                } else if (service.calculationType === "perUnit") {
-                  servicePrice = service.price * count;
-                } else if (service.calculationType === "percentage") {
-                  servicePrice = calculateBasePrice() * (service.price / 100);
-                }
-
-                return (
-                  <div key={service.value} className={styles.additionalItem}>
-                    <span>
-                      {service.label} {count > 1 ? `× ${count}` : ""}
-                    </span>
-                    <span>+{Math.round(servicePrice).toLocaleString()} ₽</span>
-                  </div>
-                );
-              })}
-          </div>
-        )}
-
-        <div className={styles.total}>
-          <span>Итого:</span>
-          <span>{totalPrice.toLocaleString()} ₽</span>
-        </div>
-      </div>
-
-      <div className={styles.formFooter}>
-        {(!formData.name || !isPhoneValid) && (
-          <p className={styles.validationError}>
-            Заполните все обязательные поля
-          </p>
-        )}
-
-        <div className={styles.agreeSection}>
-          <label className={styles.checkboxLabel}>
-            <input
-              type="checkbox"
-              checked={isChecked}
-              onChange={(e) => setIsChecked(e.target.checked)}
-            />
-            <span className={styles.checkmark}></span>
-            Соглашаюсь с{" "}
-            <button
-              type="button"
-              onClick={() => setIsPrivacyModalOpen(true)}
-              className={styles.privacyLink}
-            >
-              Политикой конфиденциальности
-            </button>
-          </label>
-        </div>
-
-        <div className={styles.navigation}>
-          <button
-            type="button"
-            onClick={handleBack}
-            className={styles.backButton}
-          >
-            Назад
-          </button>
-          <button
-            type="submit"
-            className={styles.submitButton}
-            disabled={
-              isSubmitting || !formData.name || !isPhoneValid || !isChecked
-            }
-          >
-            {isSubmitting ? "Отправка..." : "Отправить заявку"}
-          </button>
-        </div>
-      </div>
-    </form>
-  );
-
   const renderSuccess = () => (
     <div className={styles.successScreen}>
       <div className={styles.successIcon}>
-        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-          <circle cx="40" cy="40" r="40" fill="#0091C9" />
+        <svg width='80' height='80' viewBox='0 0 80 80' fill='none'>
+          <circle cx='40' cy='40' r='40' fill='#0091C9' />
           <path
-            d="M25 40L35 50L55 30"
-            stroke="white"
-            strokeWidth="6"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+            d='M25 40L35 50L55 30'
+            stroke='white'
+            strokeWidth='6'
+            strokeLinecap='round'
+            strokeLinejoin='round'
           />
         </svg>
       </div>
-      <h2 className={styles.successTitle}>Спасибо за заявку!</h2>
+      <h2 className={styles.successTitle}>Заявка на расчет отправлена!</h2>
       <p className={styles.successText}>
-        Мы получили вашу заявку и свяжемся с вами в ближайшее время для
-        уточнения деталей.
+        Мы получили вашу заявку на расчет стоимости. Скоро с вами свяжется наш
+        менеджер для уточнения деталей и предоставления точной стоимости.
       </p>
     </div>
   );
 
+  if (isSubmitted) {
+    return (
+      <div id='calculate' className={styles.container}>
+        {renderSuccess()}
+      </div>
+    );
+  }
+
   return (
     <>
-      <div id="calculate" className={styles.container}>
-        {step === 0 && (
-          <div
-            className={`${styles.welcomeScreen} ${
-              isAnimating ? styles.fadeOut : styles.fadeIn
-            }`}
-          >
-            <div className={styles.welcomeContent}>
-              <h1 className={styles.welcomeTitle}>
-                Рассчитайте стоимость уборки
-              </h1>
-              <p className={styles.welcomeText}>
-                Ответьте на несколько вопросов и получите точный расчет
-                стоимости уборки с учетом всех ваших пожеланий
-              </p>
-              <button onClick={handleNext} className={styles.startButton}>
-                Начать расчет
-              </button>
+      <div id='calculate' className={styles.container}>
+        <form onSubmit={handleSubmit} className={styles.fullForm}>
+          <h1 className={styles.formMainTitle}>Рассчитайте стоимость уборки</h1>
+
+          <div className={styles.formContent}>
+            <div className={styles.formFields}>
+              {/* Тип клиента */}
+              <div className={styles.formSection}>
+                <h2 className={styles.sectionTitle}>{userQuestion.title}</h2>
+                <div className={styles.options}>
+                  {userQuestion.options.map((option, index) => (
+                    <label
+                      key={index}
+                      className={`${styles.option} ${
+                        formData[userQuestion.name] === option.value
+                          ? styles.active
+                          : ''
+                      }`}
+                    >
+                      <input
+                        type='radio'
+                        name={userQuestion.name}
+                        value={option.value}
+                        checked={formData[userQuestion.name] === option.value}
+                        onChange={handleChange}
+                      />
+                      {option.label}
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Тип уборки */}
+              <div className={styles.formSection}>
+                <h2 className={styles.sectionTitle}>{questions[0].title}</h2>
+                <div className={styles.options}>
+                  {questions[0].options.map((option, index) => (
+                    <label
+                      key={index}
+                      className={`${styles.option} ${
+                        formData[questions[0].name] === option.value
+                          ? styles.active
+                          : ''
+                      }`}
+                    >
+                      <input
+                        type='radio'
+                        name={questions[0].name}
+                        value={option.value}
+                        checked={formData[questions[0].name] === option.value}
+                        onChange={handleChange}
+                      />
+                      {option.label}
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Количество комнат и площадь */}
+              <div className={styles.formSection}>
+                <h2 className={styles.sectionTitle}>
+                  Количество комнат и площадь
+                </h2>
+                <div className={styles.roomsAndSquareContainer}>
+                  <div className={styles.roomsSelect}>
+                    <label>Количество комнат</label>
+                    <select
+                      name={questions[1].name}
+                      value={formData[questions[1].name]}
+                      onChange={handleChange}
+                      className={styles.selectInput}
+                    >
+                      {questions[1].options.map((option, index) => (
+                        <option key={index} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className={styles.squareInput}>
+                    <label>Площадь помещения (кв.м)</label>
+                    <div className={styles.squareInputWrapper}>
+                      <input
+                        type='number'
+                        name={questions[2].name}
+                        min='1'
+                        max='1000'
+                        value={formData.square}
+                        onChange={(e) => {
+                          const inputValue = e.target.value;
+                          if (inputValue === '') {
+                            handleChange({
+                              target: {
+                                name: questions[2].name,
+                                value: 1,
+                              },
+                            });
+                            return;
+                          }
+                          const value = Math.max(
+                            1,
+                            Math.min(1000, parseInt(inputValue) || 1)
+                          );
+                          handleChange({
+                            target: {
+                              name: questions[2].name,
+                              value: value,
+                            },
+                          });
+                        }}
+                        className={styles.squareNumberInput}
+                        placeholder='50'
+                      />
+                      <div className={styles.rangeContainer}>
+                        <input
+                          type='range'
+                          name={questions[2].name}
+                          min='1'
+                          max='300'
+                          value={Math.min(300, formData.square)}
+                          onChange={(e) => {
+                            handleChange({
+                              target: {
+                                name: questions[2].name,
+                                value: parseInt(e.target.value),
+                              },
+                            });
+                          }}
+                          className={styles.rangeInput}
+                        />
+                        <div className={styles.rangeValues}>
+                          <span>1</span>
+                          <span>300</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Дополнительные услуги */}
+              <div className={styles.formSection}>
+                <h2 className={styles.sectionTitle}>{questions[3].title}</h2>
+                <div className={styles.servicesList}>
+                  {questions[3].options
+                    .slice(0, showAllServices ? questions[3].options.length : 6)
+                    .map((option, index) => {
+                      const count = getServiceCount(option.value);
+                      const isSelected = isServiceSelected(option.value);
+
+                      return (
+                        <div
+                          key={index}
+                          className={`${styles.serviceItem} ${
+                            isSelected ? styles.serviceItemActive : ''
+                          }`}
+                        >
+                          <label className={styles.serviceLabel}>
+                            <input
+                              type='checkbox'
+                              checked={isSelected || count > 0}
+                              onChange={(e) => {
+                                const shouldBeChecked =
+                                  !isSelected && count === 0;
+                                handleChange({
+                                  target: {
+                                    name: questions[3].name,
+                                    value: option.value,
+                                    type: 'checkbox',
+                                    checked: shouldBeChecked,
+                                  },
+                                });
+                              }}
+                              className={styles.serviceCheckbox}
+                            />
+                            <span className={styles.serviceName}>
+                              {option.label}
+                            </span>
+                          </label>
+                          <div className={styles.serviceRight}>
+                            {option.calculationType === 'perUnit' &&
+                              count > 0 && (
+                                <div className={styles.counter}>
+                                  <button
+                                    type='button'
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      handleChange({
+                                        target: {
+                                          name: questions[3].name,
+                                          value: option.value,
+                                          type: 'checkbox',
+                                          checked: false,
+                                        },
+                                      });
+                                    }}
+                                    disabled={count === 0}
+                                    className={styles.counterBtn}
+                                  >
+                                    -
+                                  </button>
+                                  <span className={styles.counterValue}>
+                                    {count}
+                                  </span>
+                                  <button
+                                    type='button'
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      handleChange({
+                                        target: {
+                                          name: questions[3].name,
+                                          value: option.value,
+                                          type: 'checkbox',
+                                          checked: true,
+                                        },
+                                      });
+                                    }}
+                                    className={styles.counterBtn}
+                                  >
+                                    +
+                                  </button>
+                                </div>
+                              )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                </div>
+                {questions[3].options.length > 6 && (
+                  <button
+                    type='button'
+                    onClick={() => setShowAllServices(!showAllServices)}
+                    className={styles.showAllServicesBtn}
+                  >
+                    {showAllServices
+                      ? 'Скрыть'
+                      : `Показать все (еще ${questions[3].options.length - 6})`}
+                  </button>
+                )}
+              </div>
+
+              {/* Контактные данные и дата уборки */}
+              <div className={styles.formSection}>
+                <h2 className={styles.sectionTitle}>
+                  Контактные данные и дата уборки
+                </h2>
+                <div className={styles.formGrid}>
+                  <div className={styles.inputGroup}>
+                    <label>
+                      Ваше имя
+                      <span className={styles.required}>*</span>
+                    </label>
+                    <input
+                      type='text'
+                      name='name'
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder='Как к вам обращаться?'
+                      required
+                      className={`${styles.formInput} ${
+                        !formData.name ? styles.inputError : ''
+                      }`}
+                    />
+                  </div>
+
+                  <div className={styles.inputGroup}>
+                    <label>
+                      Телефон
+                      <span className={styles.required}>*</span>
+                    </label>
+                    <input
+                      type='tel'
+                      name='phone'
+                      value={formData.phone}
+                      onChange={handlePhoneChange}
+                      onPaste={handlePaste}
+                      placeholder='+7 (000) 000-00-00'
+                      required
+                      className={`${styles.formInput} ${
+                        !isPhoneValid ? styles.inputError : ''
+                      }`}
+                    />
+                  </div>
+
+                  <div className={styles.inputGroup}>
+                    <label>Желаемая дата уборки</label>
+                    <div className={styles.dateInputContainer}>
+                      <input
+                        type='date'
+                        name='cleaningDate'
+                        value={formData.cleaningDate}
+                        onChange={handleChange}
+                        min={new Date().toISOString().split('T')[0]}
+                        className={styles.dateInput}
+                      />
+                      <span className={styles.dateHint}>
+                        Нажмите на поле и введите дату вручную (ГГГГ-ММ-ДД) или
+                        выберите из календаря
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className={styles.inputGroup}>
+                    <label>Комментарий</label>
+                    <textarea
+                      name='comment'
+                      value={formData.comment}
+                      onChange={handleChange}
+                      placeholder='Дополнительная информация (необязательно)'
+                      rows={3}
+                      className={styles.formTextarea}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Чекбокс согласия и кнопка отправки */}
+              <div className={styles.formSection}>
+                <div className={styles.agreeSection}>
+                  <label
+                    className={`${styles.checkboxLabel} ${
+                      !isChecked && (!formData.name || !isPhoneValid)
+                        ? styles.checkboxLabelError
+                        : ''
+                    }`}
+                  >
+                    <input
+                      type='checkbox'
+                      checked={isChecked}
+                      onChange={(e) => setIsChecked(e.target.checked)}
+                    />
+                    <span
+                      className={`${styles.checkmark} ${
+                        !isChecked && (!formData.name || !isPhoneValid)
+                          ? styles.checkmarkError
+                          : ''
+                      }`}
+                    ></span>
+                    <span className={styles.checkboxText}>
+                      Я даю{' '}
+                      <button
+                        type='button'
+                        onClick={() => setIsConsentModalOpen(true)}
+                        className={styles.privacyLink}
+                      >
+                        согласие на обработку персональных данных
+                      </button>{' '}
+                      и согласен(а) с{' '}
+                      <button
+                        type='button'
+                        onClick={() => setIsPrivacyModalOpen(true)}
+                        className={styles.privacyLink}
+                      >
+                        политикой конфиденциальности
+                      </button>
+                      <span className={styles.required}>*</span>
+                    </span>
+                  </label>
+                </div>
+
+                {(!formData.name || !isPhoneValid || !isChecked) && (
+                  <p className={styles.validationError}>
+                    Заполните все обязательные поля
+                  </p>
+                )}
+
+                <button
+                  type='submit'
+                  className={styles.submitButton}
+                  disabled={
+                    isSubmitting ||
+                    !formData.name ||
+                    !isPhoneValid ||
+                    !isChecked
+                  }
+                >
+                  {isSubmitting ? 'Отправка...' : 'Рассчитать стоимость'}
+                </button>
+              </div>
             </div>
           </div>
-        )}
-
-        {step === 1 && renderUser()}
-        {step > 1 && step <= questions.length + 1 && renderQuestionLegally()}
-        {step === questions.length + 2 && renderFinalForm()}
-        {step === 7 && renderSuccess()}
+        </form>
       </div>
 
       <PrivacyPolicyModal
         isOpen={isPrivacyModalOpen}
         onClose={() => setIsPrivacyModalOpen(false)}
+      />
+      <ConsentModal
+        isOpen={isConsentModalOpen}
+        onClose={() => setIsConsentModalOpen(false)}
       />
     </>
   );

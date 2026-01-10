@@ -87,6 +87,10 @@ function sanitizeInput(data) {
       typeof data.phone === 'string'
         ? data.phone.trim().substring(0, 20)
         : 'Не указан',
+    cleaningDate:
+      typeof data.cleaningDate === 'string' && data.cleaningDate.trim()
+        ? data.cleaningDate.trim().substring(0, 20)
+        : '',
     comment:
       typeof data.comment === 'string'
         ? data.comment.trim().substring(0, 1000)
@@ -246,6 +250,20 @@ async function sendMessage(token, chatId, message) {
   }
 }
 
+// Форматирование даты для читаемого вида
+function formatDate(dateString) {
+  if (!dateString) return '';
+  try {
+    const date = new Date(dateString + 'T00:00:00');
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}.${month}.${year}`;
+  } catch (error) {
+    return dateString;
+  }
+}
+
 function createTelegramMessage(data) {
   const {
     user = 'Не указано',
@@ -254,6 +272,7 @@ function createTelegramMessage(data) {
     square = 'Не указана',
     name = 'Не указано',
     phone = 'Не указан',
+    cleaningDate = '',
     comment = '',
     additionalservices = [],
     totalPrice = 0,
@@ -302,6 +321,12 @@ function createTelegramMessage(data) {
 🛠 *Основная услуга:* ${escapeMarkdown(service)}
 🚪 *Комнат:* ${escapeMarkdown(rooms)}
 📏 *Площадь:* ${escapeMarkdown(square)} м²
+
+${
+  cleaningDate
+    ? `📅 *Дата уборки:* ${escapeMarkdown(formatDate(cleaningDate))}`
+    : ''
+}
 
 💰 *Стоимость:*
 • Базовая цена: ${basePrice.toLocaleString()} ₽
