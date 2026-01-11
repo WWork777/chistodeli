@@ -72,6 +72,7 @@
             justify-content: center;
             align-items: center;
             padding: 6px 5px 6px 20px;
+            &:nth-child(1){padding: 6px 10px 6px 20px;}
             span {
               font-family: 'Montserrat';
               font-weight: 400;
