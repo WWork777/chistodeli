@@ -87,7 +87,7 @@ export function YandexMap() {
             <div className='map-contacts-messages'>
               <Link href={'https://max.ru/u/f9LHodD0cOIAQm0SvKv96wb8bxEFrrL0tqzMuIdZdexVUPak7PkwACj_B6k'}>
                 <div className='map-contact-message'>
-                  <span>Whatsapp</span>
+                  <span>Max</span>
                   <Image src="icons/maxgrad.svg" width={29} height={29}></Image>
                 </div>
               </Link>
