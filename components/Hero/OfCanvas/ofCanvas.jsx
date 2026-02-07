@@ -115,7 +115,7 @@ export function OffCanvas({ isOpen, onClose }) {
               </svg>
             </Link>
             <Link className="icon" href={"https://max.ru/u/f9LHodD0cOIAQm0SvKv96wb8bxEFrrL0tqzMuIdZdexVUPak7PkwACj_B6k"}>
-              <Image src="/icons/maxblue.svg" width={29} height={29}></Image>
+              <Image src="/icons/maxblue.svg" width={29} height={29} alt="max"></Image>
             </Link>
             <Link className="icon" href={"https://vk.com/id848910555"}>
               <svg

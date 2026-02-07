@@ -66,7 +66,7 @@ export function Footer() {
                 </svg>
               </Link>
               <Link href={"https://max.ru/u/f9LHodD0cOIAQm0SvKv96wb8bxEFrrL0tqzMuIdZdexVUPak7PkwACj_B6k"}>
-                <Image src="/icons/maxwhite.svg" width={45} height={45}></Image>
+                <Image src="/icons/maxwhite.svg" width={45} height={45} alt="max"></Image>
               </Link>
               <Link href={"https://t.me/chistodely42"}>
                 <svg
