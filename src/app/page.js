@@ -12,6 +12,7 @@ import { Questions } from "../../components/Questions/questions";
 import { Clients } from "../../components/Clients/clients";
 import { ExampleWorks } from "../../components/Examples_works/examples_works";
 import CleaningCalculator from "../../components/Price_service/pricenew";
+import { PhotoEstimate } from "../../components/PhotoEstimate/photoEstimate";
 import { Suspense } from "react";
 
 export async function generateMetadata() {
@@ -84,6 +85,11 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <PhotoEstimate
+        imageSrc="/Services/service_5.webp"
+        title="Расчет стоимости по фотографии"
+        description="Отправьте нам фотографию вашего помещения, и мы рассчитаем точную стоимость уборки. Быстро, удобно и без лишних вопросов!"
+      />
       <Suspense fallback={<div>Загрузка...</div>}>
         <Users />
       </Suspense>
