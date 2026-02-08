@@ -2,6 +2,7 @@ import CookieConsent from "../../components/Cookie/cookie";
 import YandexMetrika from "../../components/YandexMetrika/YandexMEtrika";
 import { HeaderOffCanvas } from "../../components/Hero/headerOffCanvas";
 import { Footer } from "../../components/Footer/footer";
+import './globals.scss';
 
 export const metadata = {
   icons: {

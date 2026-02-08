@@ -12,6 +12,7 @@ export default function Price() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [isPhoneValid, setIsPhoneValid] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false); // Модалка контактных данных
 
   const [formData, setFormData] = useState({
     user: 'Физическое лицо',
@@ -27,7 +28,7 @@ export default function Price() {
 
   const questions = [
     {
-      title: 'Какая уборка вам нужна?',
+      title: 'Какая уборка вам нужна? \n',
       type: 'radio',
       name: 'service',
       options: [
@@ -321,8 +322,8 @@ export default function Price() {
           ym(99528524, 'reachGoal', 'Quiz');
         }
         setIsSubmitted(true);
+        setIsContactModalOpen(false); // Закрываем модалку после успешной отправки
       } else {
-        // Показываем сообщение об ошибке из API или общее сообщение
         const errorMessage =
           data.message || `Ошибка при отправке (статус: ${response.status})`;
         console.error('Ошибка при отправке заявки:', {
@@ -351,6 +352,15 @@ export default function Price() {
 
   const isServiceSelected = (serviceValue) => {
     return formData.additionalservices.includes(serviceValue);
+  };
+
+  const openContactModal = () => {
+    // Проверяем обязательные поля перед открытием модалки
+    if (!formData.user || !formData.service || !formData.rooms || !formData.square) {
+      alert('Пожалуйста, заполните все основные поля формы');
+      return;
+    }
+    setIsContactModalOpen(true);
   };
 
   const renderSuccess = () => (
@@ -386,60 +396,68 @@ export default function Price() {
   return (
     <>
       <div id='calculate' className={styles.container}>
-        <form onSubmit={handleSubmit} className={styles.fullForm}>
+        <form className={styles.fullForm}>
           <h1 className={styles.formMainTitle}>Рассчитайте стоимость уборки</h1>
 
+          {/* Двухколоночная структура */}
           <div className={styles.formContent}>
-            <div className={styles.formFields}>
-              {/* Тип клиента */}
-              <div className={styles.formSection}>
-                <h2 className={styles.sectionTitle}>{userQuestion.title}</h2>
-                <div className={styles.options}>
-                  {userQuestion.options.map((option, index) => (
-                    <label
-                      key={index}
-                      className={`${styles.option} ${
-                        formData[userQuestion.name] === option.value
-                          ? styles.active
-                          : ''
-                      }`}
-                    >
-                      <input
-                        type='radio'
-                        name={userQuestion.name}
-                        value={option.value}
-                        checked={formData[userQuestion.name] === option.value}
-                        onChange={handleChange}
-                      />
-                      {option.label}
-                    </label>
-                  ))}
+            {/* Левый столбец */}
+            <div className={styles.leftColumn}>
+              {/* Выбор юр/физ лица + выбор уборки в одну строку */}
+              <div className={styles.firstForm}>
+                {/* Тип клиента */}
+                <div className={styles.formSection}>
+                  <h2 className={styles.sectionTitle}>{userQuestion.title}</h2>
+                  <div className={styles.options}>
+                    {userQuestion.options.map((option, index) => (
+                      <label
+                        key={index}
+                        className={`${styles.option} ${
+                          formData[userQuestion.name] === option.value
+                            ? styles.active
+                            : ''
+                        }`}
+                      >
+                        <input
+                          type='radio'
+                          name={userQuestion.name}
+                          value={option.value}
+                          checked={formData[userQuestion.name] === option.value}
+                          onChange={handleChange}
+                        />
+                        {option.label}
+                      </label>
+                    ))}
+                  </div>
                 </div>
-              </div>
 
-              {/* Тип уборки */}
-              <div className={styles.formSection}>
-                <h2 className={styles.sectionTitle}>{questions[0].title}</h2>
-                <div className={styles.options}>
-                  {questions[0].options.map((option, index) => (
-                    <label
-                      key={index}
-                      className={`${styles.option} ${
-                        formData[questions[0].name] === option.value
-                          ? styles.active
-                          : ''
-                      }`}
-                    >
-                      <input
-                        type='radio'
-                        name={questions[0].name}
-                        value={option.value}
-                        checked={formData[questions[0].name] === option.value}
-                        onChange={handleChange}
-                      />
-                      {option.label}
-                    </label>
-                  ))}
+                {/* Тип уборки */}
+                <div className={styles.formSection}>
+                  {/* <div className={styles.typeClean}> */}
+                  <h2 className={styles.sectionTitle}>{questions[0].title}</h2>
+                  <br className={styles.brHelp} />
+                  <div className={styles.options}>
+                    {questions[0].options.map((option, index) => (
+                      <label
+                        key={index}
+                        className={`${styles.option} ${
+                          formData[questions[0].name] === option.value
+                            ? styles.active
+                            : ''
+                        }`}
+                      >
+                        <input
+                          type='radio'
+                          name={questions[0].name}
+                          value={option.value}
+                          checked={formData[questions[0].name] === option.value}
+                          onChange={handleChange}
+                        />
+                        {option.label}
+                      </label>
+                    ))}
+                  </div>
+                  {/* </div> */}
                 </div>
               </div>
 
@@ -524,7 +542,10 @@ export default function Price() {
                   </div>
                 </div>
               </div>
+            </div>
 
+            {/* Правый столбец */}
+            <div className={styles.rightColumn}>
               {/* Дополнительные услуги */}
               <div className={styles.formSection}>
                 <h2 className={styles.sectionTitle}>{questions[3].title}</h2>
@@ -625,13 +646,60 @@ export default function Price() {
                   </button>
                 )}
               </div>
+            </div>
+          </div>
 
-              {/* Контактные данные и дата уборки */}
-              <div className={styles.formSection}>
-                <h2 className={styles.sectionTitle}>
-                  Контактные данные и дата уборки
-                </h2>
-                <div className={styles.formGrid}>
+          {/* Итоговая стоимость и кнопка открытия модалки */}
+          {/* <div className={styles.priceSummary}>
+            <h3 className={styles.summaryTitle}>Итоговая стоимость</h3>
+            <div className={styles.summaryItem}>
+              <span>Базовая стоимость:</span>
+              <span className={styles.summaryValue}>
+                {calculateBasePrice().toLocaleString('ru-RU')} ₽
+              </span>
+            </div>
+            <div className={styles.summaryItem}>
+              <span>Дополнительные услуги:</span>
+              <span className={styles.summaryValue}>
+                {calculateAdditionalPrice().toLocaleString('ru-RU')} ₽
+              </span>
+            </div>
+            <div className={styles.total}>
+              <span>Итого:</span>
+              <span className={styles.totalValue}>
+                {totalPrice.toLocaleString('ru-RU')} ₽
+              </span>
+            </div>
+          </div> */}
+
+          {/* Кнопка для открытия модалки */}
+          <button
+            type='button'
+            onClick={openContactModal}
+            className={styles.nextButton}
+          >
+            Перейти к оформлению
+          </button>
+        </form>
+      </div>
+
+      {/* Модальное окно для контактных данных */}
+      {isContactModalOpen && (
+        <div className={styles.modalOverlay} onClick={() => setIsContactModalOpen(false)}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <button
+              type='button'
+              className={styles.modalClose}
+              onClick={() => setIsContactModalOpen(false)}
+            >
+              ×
+            </button>
+
+            <h2 className={styles.modalTitle}>Контактные данные для заказа</h2>
+            
+            <form onSubmit={handleSubmit} className={styles.contactForm}>
+              <div className={styles.formGrid}>
+                <div className={styles.contGrid}>
                   <div className={styles.inputGroup}>
                     <label>
                       Ваше имя
@@ -686,88 +754,85 @@ export default function Price() {
                       </span>
                     </div>
                   </div>
-
-                  <div className={styles.inputGroup}>
-                    <label>Комментарий</label>
-                    <textarea
-                      name='comment'
-                      value={formData.comment}
-                      onChange={handleChange}
-                      placeholder='Дополнительная информация (необязательно)'
-                      rows={3}
-                      className={styles.formTextarea}
-                    />
-                  </div>
+                </div>
+                <div className={styles.inputGroup}>
+                  <label>Комментарий</label>
+                  <textarea
+                    name='comment'
+                    value={formData.comment}
+                    onChange={handleChange}
+                    placeholder='Дополнительная информация (необязательно)'
+                    rows={3}
+                    className={styles.formTextarea}
+                  />
                 </div>
               </div>
 
-              {/* Чекбокс согласия и кнопка отправки */}
-              <div className={styles.formSection}>
-                <div className={styles.agreeSection}>
-                  <label
-                    className={`${styles.checkboxLabel} ${
+              {/* Чекбокс согласия */}
+              <div className={styles.agreeSection}>
+                <label
+                  className={`${styles.checkboxLabel} ${
+                    !isChecked && (!formData.name || !isPhoneValid)
+                      ? styles.checkboxLabelError
+                      : ''
+                  }`}
+                >
+                  <input
+                    type='checkbox'
+                    checked={isChecked}
+                    onChange={(e) => setIsChecked(e.target.checked)}
+                  />
+                  <span
+                    className={`${styles.checkmark} ${
                       !isChecked && (!formData.name || !isPhoneValid)
-                        ? styles.checkboxLabelError
+                        ? styles.checkmarkError
                         : ''
                     }`}
-                  >
-                    <input
-                      type='checkbox'
-                      checked={isChecked}
-                      onChange={(e) => setIsChecked(e.target.checked)}
-                    />
-                    <span
-                      className={`${styles.checkmark} ${
-                        !isChecked && (!formData.name || !isPhoneValid)
-                          ? styles.checkmarkError
-                          : ''
-                      }`}
-                    ></span>
-                    <span className={styles.checkboxText}>
-                      Я даю{' '}
-                      <button
-                        type='button'
-                        onClick={() => setIsConsentModalOpen(true)}
-                        className={styles.privacyLink}
-                      >
-                        согласие на обработку персональных данных
-                      </button>{' '}
-                      и согласен(а) с{' '}
-                      <button
-                        type='button'
-                        onClick={() => setIsPrivacyModalOpen(true)}
-                        className={styles.privacyLink}
-                      >
-                        политикой конфиденциальности
-                      </button>
-                      <span className={styles.required}>*</span>
-                    </span>
-                  </label>
-                </div>
-
-                {(!formData.name || !isPhoneValid || !isChecked) && (
-                  <p className={styles.validationError}>
-                    Заполните все обязательные поля
-                  </p>
-                )}
-
-                <button
-                  type='submit'
-                  className={styles.submitButton}
-                  disabled={
-                    isSubmitting ||
-                    !formData.name ||
-                    !isPhoneValid ||
-                    !isChecked
-                  }
-                >
-                  {isSubmitting ? 'Отправка...' : 'Рассчитать стоимость'}
-                </button>
+                  ></span>
+                  <span className={styles.checkboxText}>
+                    Я даю{' '}
+                    <button
+                      type='button'
+                      onClick={() => setIsConsentModalOpen(true)}
+                      className={styles.privacyLink}
+                    >
+                      согласие на обработку персональных данных
+                    </button>{' '}
+                    и согласен(а) с{' '}
+                    <button
+                      type='button'
+                      onClick={() => setIsPrivacyModalOpen(true)}
+                      className={styles.privacyLink}
+                    >
+                      политикой конфиденциальности
+                    </button>
+                    <span className={styles.required}>*</span>
+                  </span>
+                </label>
               </div>
-            </div>
+
+              {(!formData.name || !isPhoneValid || !isChecked) && (
+                <p className={styles.validationError}>
+                  Заполните все обязательные поля
+                </p>
+              )}
+
+              <button
+                type='submit'
+                className={styles.submitButton}
+                disabled={
+                  isSubmitting ||
+                  !formData.name ||
+                  !isPhoneValid ||
+                  !isChecked
+                }
+              >
+                {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
+              </button>
+            </form>
           </div>
-        </form>
-      </div>
+        </div>
+      )}
 
       <PrivacyPolicyModal
         isOpen={isPrivacyModalOpen}

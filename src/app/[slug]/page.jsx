@@ -2,8 +2,7 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getServiceBySlug, getAllServiceSlugs } from '@/data/services.data';
-import styles from './page.module.scss';
-
+import styles from './page.module.scss'; 
 // Генерация статических параметров для всех услуг
 export async function generateStaticParams() {
   const services = getAllServiceSlugs();
@@ -12,7 +11,7 @@ export async function generateStaticParams() {
 
 // Генерация метаданных для каждой страницы
 export async function generateMetadata({ params }) {
-  const { slug } = await params;
+  const { slug } =  params;
   const service = getServiceBySlug(slug);
   
   if (!service) {
@@ -22,12 +21,13 @@ export async function generateMetadata({ params }) {
     };
   }
 
+  
   const title = service.seoTitle || `${service.title} | Клининговая компания`;
   const description = service.seoDescription || service.description;
   const imageUrl = `/Services/${service.img}`;
   
   // Замените на ваш реальный домен
-  const baseUrl = 'https://ваш-сайт.рф';
+  const baseUrl = 'https://klining-kemerovo.ru';
   const url = `${baseUrl}/${slug}`;
 
   return {
@@ -67,9 +67,10 @@ export async function generateMetadata({ params }) {
     },
   };
 }
+export const dynamic = 'force-static';
 
 export default async function ServicePage({ params }) {
-  const { slug } = await params;
+  const { slug } =  params;
   const service = getServiceBySlug(slug);
   
   // Если услуга не найдена - показываем 404
@@ -142,8 +143,9 @@ export default async function ServicePage({ params }) {
 
             <div className={styles.fullDescriptionBlock}>
               <h2 className={styles.subtitle}>Описание услуги</h2>
-              <div className={styles.fullDescription} dangerouslySetInnerHTML={{ __html: service.fullDescription.replace(/\n/g, '<br/>') }} />
-            </div>
+<p className={styles.fullDescription}>
+  {service.fullDescription}
+</p>            </div>
 
             {/* Кнопки действий */}
             <div className={styles.actions}>

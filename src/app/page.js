@@ -86,7 +86,7 @@ export default function Home() {
     <>
       <Hero />
       <PhotoEstimate
-        imageSrc="/Services/service_5.webp"
+        imageSrc="/Services/clean.webp"
         title="Расчет стоимости по фотографии"
         description="Отправьте нам фотографию вашего помещения, и мы рассчитаем точную стоимость уборки. Быстро, удобно и без лишних вопросов!"
       />
