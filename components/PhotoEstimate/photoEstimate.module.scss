@@ -8,16 +8,16 @@
 .photoEstimate {
   width: 100%;
   position: relative;
-  padding: 40px 12vw;
+  padding: 60px 12vw 5px 12vw;
   background: #fff;
   overflow: hidden;
 
   @media (max-width: 1200px) {
-    padding: 30px 6vw;
+    padding: 30px 6vw 15px 6vw;
   }
 
   @media (max-width: 768px) {
-    padding: 30px 20px;
+    padding: 30px 20px 15px 20px;
   }
 }
 
