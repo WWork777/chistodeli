@@ -11,7 +11,7 @@ export async function generateStaticParams() {
 
 // Генерация метаданных для каждой страницы
 export async function generateMetadata({ params }) {
-  const { slug } =  params;
+  const { slug } = await params;
   const service = getServiceBySlug(slug);
   
   if (!service) {
@@ -70,7 +70,7 @@ export async function generateMetadata({ params }) {
 export const dynamic = 'force-static';
 
 export default async function ServicePage({ params }) {
-  const { slug } =  params;
+  const { slug } = await params;
   const service = getServiceBySlug(slug);
   
   // Если услуга не найдена - показываем 404
@@ -106,14 +106,18 @@ export default async function ServicePage({ params }) {
             
             {/* Дополнительная информация */}
             <div className={styles.infoCard}>
-              {/* <div className={styles.infoItem}>
-                <span className={styles.infoLabel}>Цена:</span>
-                <span className={styles.infoValue}>{service.price}</span>
-              </div> */}
-              {/* <div className={styles.infoItem}>
-                <span className={styles.infoLabel}>Длительность:</span>
-                <span className={styles.infoValue}>{service.duration}</span>
-              </div> */}
+              {service.price && (
+                <div className={styles.infoItem}>
+                  <span className={styles.infoLabel}>Цена:</span>
+                  <span className={styles.infoValue}>{service.price}</span>
+                </div>
+              )}
+              {service.duration && (
+                <div className={styles.infoItem}>
+                  <span className={styles.infoLabel}>Длительность:</span>
+                  <span className={styles.infoValue}>{service.duration}</span>
+                </div>
+              )}
               <div className={styles.infoItem}>
                 <span className={styles.infoLabel}>Категория:</span>
                 <span className={styles.infoValue}>
@@ -127,14 +131,16 @@ export default async function ServicePage({ params }) {
           <div className={styles.textSection}>
             <h1 className={styles.title}>{service.title}</h1>
             
-            <div className={styles.priceBlock}>
-              {/* <span className={styles.currentPrice}>
-                {service.price}
-              </span> */}
-              {/* {service.duration && (
-                <span className={styles.duration}>{service.duration}</span>
-              )} */}
-            </div>
+            {service.price && (
+              <div className={styles.priceBlock}>
+                <span className={styles.currentPrice}>
+                  {service.price}
+                </span>
+                {service.duration && (
+                  <span className={styles.duration}>{service.duration}</span>
+                )}
+              </div>
+            )}
 
             {/* <div className={styles.descriptionBlock}>
               <h2 className={styles.subtitle}>Описание услуги</h2>

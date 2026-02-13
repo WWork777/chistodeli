@@ -106,9 +106,19 @@ export function Footer() {
                 <br />
                 Кемеровская обл. 650002
               </Link>
-              <div>ИП Смирнов Андрей Леонидович</div>
-              <div>ИНН: 420510759590</div>
-              <div>ОГРНИП: 322420500078648</div>
+              <div className="footer-ip-info">
+                <div className="ip-name">ИП Смирнов Андрей Леонидович</div>
+                <div className="ip-details">
+                  <div className="ip-detail-item">
+                    <span className="ip-label">ИНН:</span>
+                    <span className="ip-value">420510759590</span>
+                  </div>
+                  <div className="ip-detail-item">
+                    <span className="ip-label">ОГРНИП:</span>
+                    <span className="ip-value">322420500078648</span>
+                  </div>
+                </div>
+              </div>
               <button onClick={() => setIsPrivacyModalOpen(true)}>
                 Политика конфеденциальности
               </button>

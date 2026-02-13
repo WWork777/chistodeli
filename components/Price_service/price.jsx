@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './quiz.module.scss';
 import PrivacyPolicyModal from './political_confidencial';
 import ConsentModal from './consent_Modal';
@@ -8,6 +8,18 @@ export default function Price() {
   const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
   const [isConsentModalOpen, setIsConsentModalOpen] = useState(false);
   const [showAllServices, setShowAllServices] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
@@ -65,25 +77,18 @@ export default function Price() {
           displayPrice: '700₽ шт.',
         },
         {
-          value: 'Удаление пыли с оконных рам',
-          label: 'Удаление пыли с оконных рам',
-          price: 20,
-          calculationType: 'percentage',
-          displayPrice: '+20%',
-        },
-        {
           value: 'Уборка балкона с мытьем окон',
           label: 'Уборка балкона с мытьем окон',
-          price: 2500,
+          price: 4000,
           calculationType: 'fixed',
-          displayPrice: 'от 2500₽',
+          displayPrice: 'от 4000₽',
         },
         {
           value: 'Мытьё кухонных ящиков',
           label: 'Мытьё кухонных ящиков',
-          price: 1000,
-          calculationType: 'fixed',
-          displayPrice: '1000₽',
+          price: 100,
+          calculationType: 'perUnit',
+          displayPrice: '100₽ шт.',
         },
         {
           value: 'Мытьё вытяжки',
@@ -103,8 +108,8 @@ export default function Price() {
           value: 'Мытьё холодильника внутри',
           label: 'Мытьё холодильника внутри',
           price: 1000,
-          calculationType: 'perUnit',
-          displayPrice: '1000₽ шт.',
+          calculationType: 'fixed',
+          displayPrice: '1000₽',
         },
         {
           value: 'Мытье духового шкафа',
@@ -130,23 +135,24 @@ export default function Price() {
         {
           value: 'Удаление шерсти дом. животных',
           label: 'Удаление шерсти дом. животных',
-          price: 2000,
+          price: 1500,
           calculationType: 'fixed',
-          displayPrice: '2000₽',
+          displayPrice: 'от 1500₽',
         },
         {
-          value: 'Химчистка мягкой мебели, ковров',
-          label: 'Химчистка мягкой мебели, ковров',
+          value: 'Химчистка мягкой мебели, ковролин(ковровое покрытие)',
+          label: 'Химчистка мягкой мебели, ковролин(ковровое покрытие)',
           price: 2500,
-          calculationType: 'perUnit',
-          displayPrice: '2500₽ шт.',
+          calculationType: 'fixed',
+          displayPrice: 'от 2500₽',
         },
         {
           value: 'Озонирование',
           label: 'Озонирование',
-          price: 2500,
+          price: 0,
           calculationType: 'fixed',
-          displayPrice: '2500₽',
+          displayPrice: 'в подарок при генеральной уборке',
+          isFreeWithGeneral: true,
         },
       ],
     },
@@ -164,12 +170,13 @@ export default function Price() {
 
   // Расчет стоимости
   const calculateBasePrice = () => {
-    return formData.square * 250;
+    return formData.square * 200;
   };
 
   const calculateAdditionalPrice = () => {
     let additionalPrice = 0;
     const basePrice = calculateBasePrice();
+    const isGeneralCleaning = formData.service === 'Генеральная уборка';
 
     const serviceCounts = {};
     formData.additionalservices.forEach((service) => {
@@ -181,6 +188,11 @@ export default function Price() {
         (s) => s.value === serviceValue
       );
       const count = serviceCounts[serviceValue];
+
+      // Озонирование бесплатно при генеральной уборке
+      if (service?.isFreeWithGeneral && isGeneralCleaning) {
+        return; // Пропускаем, не добавляем к цене
+      }
 
       if (service?.price > 0) {
         if (service.calculationType === 'fixed') {
@@ -352,6 +364,16 @@ export default function Price() {
 
   const isServiceSelected = (serviceValue) => {
     return formData.additionalservices.includes(serviceValue);
+  };
+
+  // Проверяем, есть ли услуги с ценой "от ..."
+  const hasApproximatePrice = () => {
+    return formData.additionalservices.some((serviceValue) => {
+      const service = questions[3].options.find(
+        (s) => s.value === serviceValue
+      );
+      return service?.displayPrice?.startsWith('от');
+    });
   };
 
   const openContactModal = () => {
@@ -551,7 +573,7 @@ export default function Price() {
                 <h2 className={styles.sectionTitle}>{questions[3].title}</h2>
                 <div className={styles.servicesList}>
                   {questions[3].options
-                    .slice(0, showAllServices ? questions[3].options.length : 6)
+                    .slice(0, showAllServices ? questions[3].options.length : (isMobile ? 3 : 6))
                     .map((option, index) => {
                       const count = getServiceCount(option.value);
                       const isSelected = isServiceSelected(option.value);
@@ -581,9 +603,14 @@ export default function Price() {
                               }}
                               className={styles.serviceCheckbox}
                             />
-                            <span className={styles.serviceName}>
-                              {option.label}
-                            </span>
+                            <div className={styles.serviceNameWrapper}>
+                              <span className={styles.serviceName}>
+                                {option.label}
+                              </span>
+                              <span className={styles.servicePrice}>
+                                {option.displayPrice}
+                              </span>
+                            </div>
                           </label>
                           <div className={styles.serviceRight}>
                             {option.calculationType === 'perUnit' &&
@@ -634,7 +661,7 @@ export default function Price() {
                       );
                     })}
                 </div>
-                {questions[3].options.length > 6 && (
+                {questions[3].options.length > (isMobile ? 3 : 6) && (
                   <button
                     type='button'
                     onClick={() => setShowAllServices(!showAllServices)}
@@ -642,7 +669,7 @@ export default function Price() {
                   >
                     {showAllServices
                       ? 'Скрыть'
-                      : `Показать все (еще ${questions[3].options.length - 6})`}
+                      : `Показать все (еще ${questions[3].options.length - (isMobile ? 3 : 6)})`}
                   </button>
                 )}
               </div>
@@ -650,36 +677,55 @@ export default function Price() {
           </div>
 
           {/* Итоговая стоимость и кнопка открытия модалки */}
-          {/* <div className={styles.priceSummary}>
-            <h3 className={styles.summaryTitle}>Итоговая стоимость</h3>
-            <div className={styles.summaryItem}>
-              <span>Базовая стоимость:</span>
-              <span className={styles.summaryValue}>
-                {calculateBasePrice().toLocaleString('ru-RU')} ₽
-              </span>
+          <div className={styles.priceSummaryContainer}>
+            <div className={styles.priceSummaryLeft}>
+              <h3 className={styles.summaryTitle}>Состав расчета:</h3>
+              <div className={styles.summaryDetails}>
+                <div className={styles.summaryItem}>
+                  <span className={styles.summaryLabel}>
+                    {formData.square} м² × 200 ₽/м²
+                  </span>
+                  <span className={styles.summaryValue}>
+                    {calculateBasePrice().toLocaleString('ru-RU')} ₽
+                  </span>
+                </div>
+                {calculateAdditionalPrice() > 0 && (
+                  <div className={styles.summaryItem}>
+                    <span className={styles.summaryLabel}>
+                      Дополнительные услуги
+                    </span>
+                    <span className={styles.summaryValue}>
+                      {hasApproximatePrice() && (
+                        <span className={styles.approximateSymbolSmall}>~</span>
+                      )}
+                      {calculateAdditionalPrice().toLocaleString('ru-RU')} ₽
+                    </span>
+                  </div>
+                )}
+              </div>
             </div>
-            <div className={styles.summaryItem}>
-              <span>Дополнительные услуги:</span>
-              <span className={styles.summaryValue}>
-                {calculateAdditionalPrice().toLocaleString('ru-RU')} ₽
-              </span>
+            <div className={styles.priceSummaryRight}>
+              <div className={styles.totalPriceContainer}>
+                <div className={styles.totalPrice}>
+                  {hasApproximatePrice() && (
+                    <span className={styles.approximateSymbol}>~</span>
+                  )}
+                  {totalPrice.toLocaleString('ru-RU')}
+                  <span className={styles.totalCurrency}> ₽</span>
+                </div>
+                <div className={styles.totalLabel}>
+                  Итоговая стоимость работ
+                </div>
+              </div>
+              <button
+                type='button'
+                onClick={openContactModal}
+                className={styles.orderButton}
+              >
+                Перейти к оформлению
+              </button>
             </div>
-            <div className={styles.total}>
-              <span>Итого:</span>
-              <span className={styles.totalValue}>
-                {totalPrice.toLocaleString('ru-RU')} ₽
-              </span>
-            </div>
-          </div> */}
-
-          {/* Кнопка для открытия модалки */}
-          <button
-            type='button'
-            onClick={openContactModal}
-            className={styles.nextButton}
-          >
-            Перейти к оформлению
-          </button>
+          </div>
         </form>
       </div>
 
