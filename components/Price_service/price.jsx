@@ -74,7 +74,7 @@ export default function Price() {
           label: 'Мытьё окон',
           price: 700,
           calculationType: 'perUnit',
-          displayPrice: '700₽ шт.',
+          displayPrice: '700₽ створка',
         },
         {
           value: 'Уборка балкона с мытьем окон',
@@ -170,7 +170,7 @@ export default function Price() {
 
   // Расчет стоимости
   const calculateBasePrice = () => {
-    return formData.square * 200;
+    return formData.square * 250;
   };
 
   const calculateAdditionalPrice = () => {
@@ -419,7 +419,7 @@ export default function Price() {
     <>
       <div id='calculate' className={styles.container}>
         <form className={styles.fullForm}>
-          <h1 className={styles.formMainTitle}>Рассчитайте стоимость уборки</h1>
+          <h1 className={styles.formMainTitle}>Предварительный расчет стоимости уборки</h1>
 
           {/* Двухколоночная структура */}
           <div className={styles.formContent}>
@@ -683,7 +683,7 @@ export default function Price() {
               <div className={styles.summaryDetails}>
                 <div className={styles.summaryItem}>
                   <span className={styles.summaryLabel}>
-                    {formData.square} м² × 200 ₽/м²
+                    {formData.square} м² × 250 ₽/м²
                   </span>
                   <span className={styles.summaryValue}>
                     {calculateBasePrice().toLocaleString('ru-RU')} ₽
@@ -795,8 +795,7 @@ export default function Price() {
                         className={styles.dateInput}
                       />
                       <span className={styles.dateHint}>
-                        Нажмите на поле и введите дату вручную (ГГГГ-ММ-ДД) или
-                        выберите из календаря
+                        Выезд на объект осуществляется от 12500 рублей.
                       </span>
                     </div>
                   </div>

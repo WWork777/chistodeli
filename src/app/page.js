@@ -1,4 +1,3 @@
-import Image from "next/image";
 import "./globals.scss";
 import { HeaderOffCanvas } from "../../components/Hero/headerOffCanvas";
 import { Hero } from "../../components/Hero/Hero/hero";
@@ -11,7 +10,6 @@ import { Reviews } from "../../components/Reviews/reviews";
 import { Questions } from "../../components/Questions/questions";
 import { Clients } from "../../components/Clients/clients";
 import { ExampleWorks } from "../../components/Examples_works/examples_works";
-import CleaningCalculator from "../../components/Price_service/pricenew";
 import { PhotoEstimate } from "../../components/PhotoEstimate/photoEstimate";
 import { Suspense } from "react";
 
@@ -95,7 +93,6 @@ export default function Home() {
       </Suspense>
 
       <Price />
-      {/* <CleaningCalculator /> */}
       <ExampleWorks />
       <Promoutions />
       <Reviews />
