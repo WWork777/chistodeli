@@ -142,6 +142,25 @@ export async function POST(request) {
       service: sanitizedData.service,
     });
 
+    // MAX
+    try{
+      const Phone = "79050783111";
+      const idInstance = "3100517801";
+      const apiTokenInstance =
+      "4e23b210658549c881680633b93bb11301a0f304a927433da6";
+      const maxResponse = await fetch(
+      `https://api.green-api.com/waInstance${idInstance}/SendMessage/${apiTokenInstance}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+        chatId: `${Phone}@c.us`,
+        message: createTelegramMessage(sanitizedData),
+        }),
+      },
+      );
+    }
+    catch {} 
     // Автоматически отправляем в Telegram через Bot API
     const result = await sendViaTelegram(sanitizedData);
 
@@ -209,6 +228,7 @@ async function sendViaTelegram(data) {
 
 // Отправка сообщения в Telegram
 async function sendMessage(token, chatId, message) {
+  
   try {
     const response = await fetch(
       `https://api.telegram.org/bot${token}/sendMessage`,
