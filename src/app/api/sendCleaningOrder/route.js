@@ -142,40 +142,46 @@ export async function POST(request) {
       service: sanitizedData.service,
     });
 
-    // MAX
-    try{
-      const Phone = "79050783111";
-      const idInstance = "3100517801";
-      const apiTokenInstance =
-      "4e23b210658549c881680633b93bb11301a0f304a927433da6";
-      const maxResponse = await fetch(
+    // === ОТПРАВКА ЧЕРЕЗ GREEN-API (WHATSAPP) ===
+    const Phone = "79050783111";
+    const idInstance = "3100517801";
+    const apiTokenInstance = "4e23b210658549c881680633b93bb11301a0f304a927433da6";
+    
+    const maxResponse = await fetch(
       `https://api.green-api.com/waInstance${idInstance}/SendMessage/${apiTokenInstance}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-        chatId: `${Phone}@c.us`,
-        message: createTelegramMessage(sanitizedData),
+          chatId: `${Phone}@c.us`,
+          message: createTelegramMessage(sanitizedData),
         }),
-      },
-      );
-    }
-    catch {} 
-    // Автоматически отправляем в Telegram через Bot API
-    const result = await sendViaTelegram(sanitizedData);
+      }
+    );
 
-    if (result.success) {
+    // Корректно считываем ответ от Green-API
+    const result = await maxResponse.json();
+    
+    // Green-API возвращает { idMessage: "..." } при успехе или { error: "...", errorDescription: "..." } при ошибке
+    if (maxResponse.ok && result.idMessage) {
+      console.log('✅ Сообщение отправлено в WhatsApp, ID:', result.idMessage);
+      
       return NextResponse.json(
         {
           success: true,
-          message:
-            'Заявка успешно отправлена! Менеджер свяжется с вами в течение 15 минут.',
+          message: 'Заявка успешно отправлена! Менеджер свяжется с вами в течение 15 минут.',
         },
         { status: 200 }
       );
     } else {
-      throw new Error(result.error);
+      console.error('❌ Ошибка Green-API:', result);
+      throw new Error(result.errorDescription || result.error || 'Ошибка отправки сообщения');
     }
+
+    // === TELEGRAM ЗАКОММЕНТИРОВАН ===
+    // const result = await sendViaTelegram(sanitizedData);
+    // if (result.success) { ... }
+
   } catch (error) {
     // Не раскрываем детали ошибки клиенту
     console.error('❌ Ошибка при обработке заявки:', error.message);
@@ -190,7 +196,9 @@ export async function POST(request) {
   }
 }
 
+// === ФУНКЦИИ TELEGRAM ЗАКОММЕНТИРОВАНЫ ===
 // Автоматическая отправка через Telegram Bot API
+/*
 async function sendViaTelegram(data) {
   const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
   const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
@@ -217,7 +225,6 @@ async function sendViaTelegram(data) {
   // Проверка длины сообщения (Telegram лимит 4096 символов)
   if (message.length > 4096) {
     console.warn('⚠️ Сообщение слишком длинное, обрезаем до 4096 символов');
-    // Обрезаем сообщение, оставляя важную информацию
     const truncatedMessage =
       message.substring(0, 4000) + '\n\n... (сообщение обрезано)';
     return await sendMessage(TELEGRAM_BOT_TOKEN, chatIdNum, truncatedMessage);
@@ -228,7 +235,6 @@ async function sendViaTelegram(data) {
 
 // Отправка сообщения в Telegram
 async function sendMessage(token, chatId, message) {
-  
   try {
     const response = await fetch(
       `https://api.telegram.org/bot${token}/sendMessage`,
@@ -240,7 +246,7 @@ async function sendMessage(token, chatId, message) {
         body: JSON.stringify({
           chat_id: chatId,
           text: message,
-          parse_mode: 'Markdown', // Для форматирования *жирный текст*
+          parse_mode: 'Markdown',
         }),
       }
     );
@@ -254,7 +260,6 @@ async function sendMessage(token, chatId, message) {
       );
       return { success: true, id: result.result.message_id };
     } else {
-      // Не логируем полный ответ API (может содержать чувствительные данные)
       console.error('❌ Ошибка Telegram API:', {
         error_code: result.error_code,
         description: result.description?.substring(0, 100),
@@ -269,6 +274,7 @@ async function sendMessage(token, chatId, message) {
     return { success: false, error: 'Ошибка отправки сообщения' };
   }
 }
+*/
 
 // Форматирование даты для читаемого вида
 function formatDate(dateString) {
