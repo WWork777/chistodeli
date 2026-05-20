@@ -1,8 +1,8 @@
 import CookieConsent from "../../components/Cookie/cookie";
-import NewYearModal from "../../components/NewYearModal/NewYearModal";
 import YandexMetrika from "../../components/YandexMetrika/YandexMEtrika";
 import { HeaderOffCanvas } from "../../components/Hero/headerOffCanvas";
 import { Footer } from "../../components/Footer/footer";
+import './globals.scss';
 
 export const metadata = {
   icons: {
@@ -30,7 +30,6 @@ export default function RootLayout({ children }) {
           {children}
 
           <CookieConsent />
-          <NewYearModal />
           <YandexMetrika />
           <Footer />
         </body>

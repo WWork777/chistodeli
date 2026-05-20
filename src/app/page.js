@@ -1,4 +1,3 @@
-import Image from "next/image";
 import "./globals.scss";
 import { HeaderOffCanvas } from "../../components/Hero/headerOffCanvas";
 import { Hero } from "../../components/Hero/Hero/hero";
@@ -11,7 +10,7 @@ import { Reviews } from "../../components/Reviews/reviews";
 import { Questions } from "../../components/Questions/questions";
 import { Clients } from "../../components/Clients/clients";
 import { ExampleWorks } from "../../components/Examples_works/examples_works";
-import CleaningCalculator from "../../components/Price_service/pricenew";
+import { PhotoEstimate } from "../../components/PhotoEstimate/photoEstimate";
 import { Suspense } from "react";
 
 export async function generateMetadata() {
@@ -84,12 +83,16 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <PhotoEstimate
+        imageSrc="/Services/clean.webp"
+        title="Расчет стоимости по фотографии"
+        description="Отправьте нам фотографию вашего помещения, и мы рассчитаем точную стоимость уборки. Быстро, удобно и без лишних вопросов!"
+      />
       <Suspense fallback={<div>Загрузка...</div>}>
         <Users />
       </Suspense>
 
       <Price />
-      {/* <CleaningCalculator /> */}
       <ExampleWorks />
       <Promoutions />
       <Reviews />

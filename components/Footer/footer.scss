@@ -53,6 +53,42 @@ footer {
       button {
         color: #0091c9;
       }
+      .footer-ip-info {
+        margin-top: 10px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        .ip-name {
+          font-size: 20px;
+          font-weight: 600;
+          color: #fff;
+          margin-bottom: 4px;
+        }
+        .ip-details {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          .ip-detail-item {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            align-items: baseline;
+            gap: 8px;
+            font-size: 16px;
+            .ip-label {
+              color: rgba(255, 255, 255, 0.7);
+              font-weight: 400;
+            }
+            .ip-value {
+              color: #fff;
+              font-weight: 500;
+              font-family: 'Courier New', monospace;
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -99,6 +135,20 @@ footer {
       }
       .footer-contact {
         font-size: 12px;
+        .footer-ip-info {
+          padding-top: 15px;
+          gap: 10px;
+          .ip-name {
+            font-size: 14px;
+          }
+          .ip-details {
+            gap: 6px;
+            .ip-detail-item {
+              font-size: 12px;
+              gap: 6px;
+            }
+          }
+        }
       }
     }
   }
@@ -109,6 +159,20 @@ footer {
     .footer-contacts {
       .footer-contact {
         gap: 15px;
+        .footer-ip-info {
+          padding-top: 12px;
+          gap: 8px;
+          .ip-name {
+            font-size: 13px;
+          }
+          .ip-details {
+            gap: 5px;
+            .ip-detail-item {
+              font-size: 11px;
+              gap: 5px;
+            }
+          }
+        }
       }
     }
   }
