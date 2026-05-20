@@ -1,4 +1,5 @@
 User-agent: *
+Clean-param: etext
 Allow: /
 
 Sitemap: https://klining-kemerovo.ru/sitemap.xml
